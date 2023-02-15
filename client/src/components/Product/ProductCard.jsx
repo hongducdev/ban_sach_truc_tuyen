@@ -13,8 +13,8 @@ const ProductCard = () => {
           alt=""
           className="max-w-[300px] rounded-lg"
         />
-        <button className="uppercase text-white bg-softDark px-10 py-2 absolute bottom-3 right-3 font-semibold rounded-lg">
-          Mua ngay
+        <button className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 right-3 font-semibold rounded-lg text-xs">
+          Thêm vào giỏ hàng
         </button>
       </div>
       <div className="mt-3">
