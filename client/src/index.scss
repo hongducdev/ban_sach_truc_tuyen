@@ -25,3 +25,13 @@
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   @apply bg-primary;
 }
+
+.wrap-text-1 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 25px;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
