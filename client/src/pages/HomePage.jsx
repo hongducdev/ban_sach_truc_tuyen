@@ -12,6 +12,10 @@ const HomePage = () => {
         <Category title="Sản phẩm nổi bật" />
         <div className="mt-10"></div>
         <ProductList />
+        <div className="mt-10"></div>
+        <button className="button uppercase">
+          Xem thêm sản phẩm
+        </button>
       </div>
       <h1>Home Page</h1>
     </Fragment>

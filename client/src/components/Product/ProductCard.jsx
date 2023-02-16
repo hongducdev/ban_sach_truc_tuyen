@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = () => {
   return (
-    <div className="">
+    <div className="select-none">
       <div className="relative inline-block">
         <div className="absolute bg-primary text-white font-semibold py-1 px-3 rounded-tl-lg rounded-br-lg">
           -4%
@@ -15,6 +15,9 @@ const ProductCard = () => {
         />
         <button className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 right-3 font-semibold rounded-lg text-xs">
           Thêm vào giỏ hàng
+        </button>
+        <button className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 left-3 font-semibold rounded-lg text-xs">
+          Mua ngay
         </button>
       </div>
       <div className="mt-3">

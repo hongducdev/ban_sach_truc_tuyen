@@ -9,7 +9,7 @@ const HeaderList = [
   },
   {
     name: "Tủ sách hướng nghiệp",
-    path: "/tu-sach-huong-nghiep",
+    path: "/collection/tu-sach-huong-nghiep",
   },
   {
     name: "Tủ sách triết học",
