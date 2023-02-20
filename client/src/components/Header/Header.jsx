@@ -53,7 +53,7 @@ const Header = () => {
               />
             </svg>
           </Link>
-          <Link className="flex items-center">
+          <Link className="flex items-center" to="/gio-hang">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

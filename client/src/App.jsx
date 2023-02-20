@@ -7,6 +7,8 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const Contact = lazy(() => import("./pages/Contact"));
 const CollectionPage = lazy(() => import("./pages/CollectionPage"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));
+const CartPage = lazy(() => import("./pages/CartPage"));
+const CheckOutPage = lazy(() => import("./pages/CheckOutPage"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
         <Route element={<Layout></Layout>}>
           <Route path="/" element={<HomePage></HomePage>}></Route>
           <Route path="/lien-he" element={<Contact></Contact>}></Route>
+          <Route path="/gio-hang" element={<CartPage></CartPage>}></Route>
+          <Route path="/thanh-toan" element={<CheckOutPage></CheckOutPage>}></Route>
           <Route path="/collection/:slug" element={<CollectionPage></CollectionPage>}></Route>
           <Route path="/product/:slug" element={<ProductPage></ProductPage>}></Route>
           <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
