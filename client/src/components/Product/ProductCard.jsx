@@ -21,7 +21,7 @@ const ProductCard = () => {
         </button>
       </div>
       <div className="mt-3">
-        <Link className="wrap-text-1 font-medium text-sm text-text2">
+        <Link className="wrap-text-1 font-medium text-sm text-text2" to="/product/123">
           Sách Người Trong Muôn Nghề: Ngành Kinh tế có gì? - Bức tranh tổng quan
           ngành Kinh tế
         </Link>

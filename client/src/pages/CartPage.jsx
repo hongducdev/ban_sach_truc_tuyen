@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import Category from "../components/Category/Category";
+import ProductList from "../components/Product/ProductLIst";
 
 const CartPage = () => {
   return (
@@ -117,6 +119,13 @@ const CartPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="text-center my-10">
+          <Category title="Sản phẩm có thể bạn thích" />
+          <div className="mt-10"></div>
+          <ProductList />
+          <div className="mt-10"></div>
+          <button className="button uppercase">Xem thêm sản phẩm</button>
         </div>
       </div>
     </Fragment>
