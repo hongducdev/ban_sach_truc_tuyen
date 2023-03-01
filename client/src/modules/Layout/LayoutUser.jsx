@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Footer, Header } from "../../components";
 
-const Layout = () => {
+const LayoutUser = () => {
   return (
     <div className="">
       <Header />
@@ -12,4 +12,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LayoutUser;
