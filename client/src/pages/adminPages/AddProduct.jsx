@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Dropdown } from "../../components/dropdown";
 
 const schema = yup.object({
   name: yup.string().required("Tên sản phẩm không được để trống"),
@@ -17,15 +18,29 @@ const schema = yup.object({
   stock: yup.number().required("Số lượng không được để trống"),
 });
 
+const categoriesData = ["architecture", "education"];
+
 const AddProduct = () => {
   const {
-    control,
     handleSubmit,
+    control,
+    setValue,
+    reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onBlur",
   });
+
+  const getDropdownLabel = (name, defaultValue = "") => {
+    const value = watch(name) || defaultValue;
+    return value;
+  };
+
+  const handleSelectDropdownOption = (name, value) => {
+    setValue(name, value);
+  };
 
   useEffect(() => {
     const arrErroes = Object.values(errors);
@@ -37,10 +52,13 @@ const AddProduct = () => {
     }
   }, [errors]);
 
-  const handleAddProduct = (data) => {
-    console.log(data);
+  const handleAddProduct = (values) => {
     axios
-      .post("https://api-ebook.cyclic.app/api/products", data)
+      .post("https://api-ebook.cyclic.app/api/products", {
+        name: values.name,
+        price: values.price,
+        description: values.description,
+      })
       .then((res) => {
         if (res.status === 201) {
           toast.success("Thêm sản phẩm thành công", {
@@ -53,13 +71,11 @@ const AddProduct = () => {
             delay: 0,
           });
         }
-      }).catch((err) => {
-        toast.error("Thêm sản phẩm thất bại", {
-          pauseOnHover: false,
-          delay: 0,
-        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }
+  };
 
   return (
     <Fragment>
@@ -118,13 +134,24 @@ const AddProduct = () => {
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="category">Danh mục</Label>
-            <Input
-              type="text"
-              name="category"
-              control={control}
-              placeholder="Nhập danh mục"
-              className="bg-transparent text-white"
-            />
+            <Dropdown>
+              <Dropdown.Select
+                placeholder={getDropdownLabel(
+                  "category",
+                  "Select category"
+                )}></Dropdown.Select>
+              <Dropdown.List>
+                {categoriesData.map((category) => (
+                  <Dropdown.Option
+                    key={category}
+                    onClick={() =>
+                      handleSelectDropdownOption("category", category)
+                    }>
+                    <span className="capitalize">{category}</span>
+                  </Dropdown.Option>
+                ))}
+              </Dropdown.List>
+            </Dropdown>
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="image">Ảnh</Label>
