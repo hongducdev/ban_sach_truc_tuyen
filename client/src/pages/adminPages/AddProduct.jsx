@@ -4,6 +4,7 @@ import { Input, Label, Textarea } from "../../components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const schema = yup.object({
   name: yup.string().required("Tên sản phẩm không được để trống"),
@@ -38,7 +39,26 @@ const AddProduct = () => {
 
   const handleAddProduct = (data) => {
     console.log(data);
-    toast.success("Thêm sản phẩm thành công");
+    axios
+      .post("https://api-ebook.cyclic.app/api/products", data)
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success("Thêm sản phẩm thành công", {
+            pauseOnHover: false,
+            delay: 0,
+          });
+        } else {
+          toast.error("Thêm sản phẩm thất bại", {
+            pauseOnHover: false,
+            delay: 0,
+          });
+        }
+      }).catch((err) => {
+        toast.error("Thêm sản phẩm thất bại", {
+          pauseOnHover: false,
+          delay: 0,
+        });
+      });
   }
 
   return (
@@ -109,7 +129,7 @@ const AddProduct = () => {
           <div className="flex flex-col gap-3">
             <Label htmlFor="image">Ảnh</Label>
             <Input
-              type="file"
+              type="text"
               name="image"
               control={control}
               placeholder="Nhập ảnh"
