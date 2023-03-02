@@ -1,10 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Input from "../components/Input/Input";
-import Textarea from "../components/Input/Texearea";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Input, Textarea } from "../components";
 
 const schema = yup.object({
   name: yup.string().required("Vui lòng nhập tên của bạn"),

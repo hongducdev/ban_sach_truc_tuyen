@@ -8,7 +8,7 @@ const LayoutAdmin = () => {
       <div className="w-[15vw] bg-darkbg text-white">
         <NavbarAdmin />
       </div>
-      <div className="w-[85vw] bg-darkSecondary text-white">
+      <div className="w-[85vw] bg-darkSecondary text-white p-10">
         <Outlet></Outlet>
       </div>
     </div>

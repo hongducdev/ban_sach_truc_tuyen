@@ -17,6 +17,7 @@ const AdminHomePage = lazy(() => import("./pages/adminPages/AdminHomePage"));
 const DoanhThuPage = lazy(() => import("./pages/adminPages/DoanhThuPage"));
 const SanPhamPage = lazy(() => import("./pages/adminPages/SanPhamPage"));
 const DonHangPage = lazy(() => import("./pages/adminPages/DonHangPage"));
+const AddProduct = lazy(() => import("./pages/adminPages/AddProduct"));
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/admin/thong-ke-doanh-thu" element={<DoanhThuPage />} />
           <Route path="/admin/quan-ly-san-pham" element={<SanPhamPage />} />
           <Route path="/admin/quan-ly-don-hang" element={<DonHangPage />} />
+          <Route path="/admin/add-product" element={<AddProduct />} />
         </Route>
       </Routes>
     </Suspense>
