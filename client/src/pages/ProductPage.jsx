@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Category from "../components/Category/Category";
-import ProductList from "../components/Product/ProductLIst";
+import ProductList from "../components/Product/ProductList";
 
 const image = [
   {

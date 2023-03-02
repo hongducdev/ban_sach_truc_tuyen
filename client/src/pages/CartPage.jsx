@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Category from "../components/Category/Category";
-import ProductList from "../components/Product/ProductLIst";
+import ProductList from "../components/Product/ProductList";
 
 const CartPage = () => {
   return (
