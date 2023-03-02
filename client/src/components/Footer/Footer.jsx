@@ -3,6 +3,7 @@ import { FaFacebook, FaGithub } from "react-icons/fa";
 import FooterItem from "./FooterItem";
 import FooterItemLink from "./FooterItemLink";
 import FooterItemContact from "./FooterItemContact";
+import { Link } from "react-router-dom";
 
 const SocialList = [
   {
@@ -89,6 +90,16 @@ const Footer = () => {
             ))}
           </ul>
         </FooterItem>
+        <Link to="/admin">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+            Admin
+          </button>
+        </Link>
+        <Link to="/admin/add-product">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+            Thêm sản phẩm
+          </button>
+        </Link>
       </div>
     </div>
   );
