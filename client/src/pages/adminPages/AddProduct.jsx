@@ -14,7 +14,7 @@ const schema = yup.object({
   price: yup.number().required("Giá không được để trống"),
   description: yup.string().required("Mô tả không được để trống"),
   category: yup.string().required("Danh mục không được để trống"),
-  image: yup.string().required("Ảnh không được để trống"),
+  images: yup.string().required("Ảnh không được để trống"),
   stock: yup.number().required("Số lượng không được để trống"),
 });
 
@@ -30,7 +30,7 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "onBlur",
+    mode: "onSubmit",
   });
 
   const getDropdownLabel = (name, defaultValue = "") => {
@@ -55,12 +55,10 @@ const AddProduct = () => {
   const handleAddProduct = (values) => {
     axios
       .post("https://api-ebook.cyclic.app/api/products", {
-        name: values.name,
-        price: values.price,
-        description: values.description,
+        ...values,
       })
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           toast.success("Thêm sản phẩm thành công", {
             pauseOnHover: false,
             delay: 0,
@@ -154,10 +152,10 @@ const AddProduct = () => {
             </Dropdown>
           </div>
           <div className="flex flex-col gap-3">
-            <Label htmlFor="image">Ảnh</Label>
+            <Label htmlFor="images">Ảnh</Label>
             <Input
               type="text"
-              name="image"
+              name="images"
               control={control}
               placeholder="Nhập ảnh"
               className="bg-transparent text-white"
