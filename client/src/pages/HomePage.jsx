@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Banner } from "../components";
 import Category from "../components/Category/Category";
 import ProductCard from "../components/Product/ProductCard";
-import ProductList from "../components/Product/ProductLIst";
+import ProductList from "../components/Product/ProductList";
 
 const HomePage = () => {
   return (
