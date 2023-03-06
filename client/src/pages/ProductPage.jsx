@@ -44,9 +44,12 @@ const image = [
 const ProductPage = () => {
   const [Image, setImage] = useState(image[0].src);
   const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(10);
 
   const handleAdd = () => {
-    setCount(count + 1);
+    if (count < quantity) {
+      setCount(count + 1);
+    }
   };
 
   const handleSub = () => {
@@ -108,35 +111,69 @@ const ProductPage = () => {
           <div className="flex items-center gap-2 my-5">
             <h3 className="text-text1 font-semibold">Số lượng:</h3>
             <div className="flex items-center gap-2">
-              <button
-                className="w-8 h-8 rounded-md bg-strock text-text3 text-2xl font-semibold"
-                onClick={handleAdd}>
-                +
-              </button>
-              <input
-                type="number"
-                className="w-16 h-8 rounded-md bg-strock text-text3 text-center"
-                value={count}
-              />
-              <button
-                className="w-8 h-8 rounded-md bg-strock text-text3 text-2xl font-semibold"
-                onClick={handleSub}>
-                -
-              </button>
+              {quantity > 0 ? (
+                <div className="flex items-center gap-2">
+                  <button
+                    className="w-8 h-8 rounded-md bg-strock text-text3 text-2xl font-semibold"
+                    onClick={handleAdd}>
+                    +
+                  </button>
+                  <input
+                    type="number"
+                    className="w-16 h-8 rounded-md bg-strock text-text3 text-center"
+                    value={count}
+                  />
+                  <button
+                    className="w-8 h-8 rounded-md bg-strock text-text3 text-2xl font-semibold"
+                    onClick={handleSub}>
+                    -
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <button
+                    className="w-8 h-8 rounded-md bg-strock text-text3 text-2xl font-semibold"
+                    onClick={handleAdd} disabled>
+                    +
+                  </button>
+                  <input
+                    type="number"
+                    className="w-16 h-8 rounded-md bg-strock text-text3 text-center"
+                    value={count}
+                    disabled
+                  />
+                  <button
+                    className="w-8 h-8 rounded-md bg-strock text-text3 text-2xl font-semibold"
+                    onClick={handleSub}
+                    disabled
+                    >
+                    -
+                  </button>
+                </div>
+              )}
+              <p className="">
+                <span className="">{quantity}</span> sản phẩm có sẵn
+              </p>
             </div>
           </div>
           {/* button */}
           <div className="flex items-center gap-2">
-            <button className="w-1/2 h-12 rounded-md bg-error text-white text-lg font-semibold">
-              Thêm vào giỏ hàng
-            </button>
+            {quantity > 0 ? (
+              <button className="w-1/2 h-12 rounded-md bg-error text-white text-lg font-semibold">
+                Thêm vào giỏ hàng
+              </button>
+            ) : (
+              <button
+                className="w-1/2 h-12 rounded-md bg-error text-white text-lg font-semibold"
+                disabled>
+                Hết hàng
+              </button>
+            )}
           </div>
         </div>
       </div>
       <div className="container">
-        <h3 className="text-text1 underline font-semibold text-xl">
-          Mô tả
-        </h3>
+        <h3 className="text-text1 underline font-semibold text-xl">Mô tả</h3>
         <p className="text-text2">
           Hầu hết những người trẻ đều đã từng hoặc đang trải qua cảm giác không
           biết mình thuộc về đâu. Khó khăn lớn nhất có lẽ không phải là kiếm

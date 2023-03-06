@@ -5,7 +5,7 @@ import ProductList from "../components/Product/ProductList";
 
 const CartPage = () => {
   return (
-    <Fragment>
+    <Fragment className="bg-white">
       <div className="container">
         <div className="flex items-center justify-between py-5">
           <div className="text-2xl font-bold text-text1">Giỏ hàng</div>

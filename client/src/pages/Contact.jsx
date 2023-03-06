@@ -41,7 +41,7 @@ const Contact = () => {
 
   return (
     <Fragment>
-      <div className="container my-20 flex justify-between">
+      <div className="container my-20 flex justify-between bg-white">
         <div>
           <h1 className="text-4xl font-semibold text-text2 relative after:absolute after:w-[40%] after:bg-text2 after:h-[2px] after:bottom-0 after:left-0 inline-block">
             Liên hệ

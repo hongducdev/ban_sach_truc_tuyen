@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <Fragment>
       <Banner />
-      <div className="container text-center my-20">
+      <div className="container text-center my-20 bg-white">
         <Category title="Sản phẩm nổi bật" />
         <div className="mt-10"></div>
         <ProductList />

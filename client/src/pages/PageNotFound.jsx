@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 const PageNotFound = () => {
   return (
     <Fragment>
-      <div className="">
+      <div className="bg-white">
         <div className="container h-[70vh]">
           <div class="wrapper">
             <div class="error">
