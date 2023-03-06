@@ -6,7 +6,7 @@ import ProductList from "../components/Product/ProductList";
 
 const HomePage = () => {
   return (
-    <Fragment>
+    <Fragment className="bg-white">
       <Banner />
       <div className="container text-center my-20 bg-white">
         <Category title="Sản phẩm nổi bật" />
