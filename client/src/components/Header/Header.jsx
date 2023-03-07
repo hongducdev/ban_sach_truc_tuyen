@@ -38,7 +38,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="text-text3 flex items-center gap-x-10">
-          <Link>
+          <Link to="/tim-kiem">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

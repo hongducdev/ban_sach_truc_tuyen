@@ -10,6 +10,7 @@ const CollectionPage = lazy(() => import("./pages/CollectionPage"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const CheckOutPage = lazy(() => import("./pages/CheckOutPage"));
+const SearchPage = lazy(() => import("./pages/SearchPage"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const AdminLoginPage = lazy(() => import("./pages/adminPages/AdminLoginPage"));
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/" element={<HomePage></HomePage>}></Route>
           <Route path="/lien-he" element={<Contact></Contact>}></Route>
           <Route path="/gio-hang" element={<CartPage></CartPage>}></Route>
+          <Route path="/tim-kiem" element={<SearchPage></SearchPage>}></Route>
           <Route
             path="/thanh-toan"
             element={<CheckOutPage></CheckOutPage>}></Route>
