@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Label, Textarea } from "../../components";
 import * as yup from "yup";
@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Dropdown } from "../../components/dropdown";
+import { useParams } from "react-router-dom";
 
 const schema = yup.object({
   name: yup.string().required("Tên sản phẩm không được để trống"),
@@ -27,7 +28,10 @@ const schema = yup.object({
 
 const categoriesData = ["architecture", "education"];
 
-const AddProduct = () => {
+const EditProduct = () => {
+  const { productId } = useParams();
+  const [product, setProduct] = useState([]);
+
   const {
     handleSubmit,
     control,
@@ -59,51 +63,44 @@ const AddProduct = () => {
     }
   }, [errors]);
 
-  const handleAddProduct = (values) => {
-    // get 9 image to array images
-    const images = [];
-    for (let i = 1; i <= 8; i++) {
-      images.push(values[`image${i}`]);
-    }
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        axios
+          .get(`https://api-ebook.cyclic.app/api/products/${productId}`)
+          .then((res) => {
+            setProduct(res.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProduct();
+  }, [productId, reset]);
 
-    axios
-      .post("https://api-ebook.cyclic.app/api/products", {
-        name: values.name,
-        author: values.author,
-        introduction: values.introduction,
-        price: values.price,
-        description: values.description,
-        category: values.category,
-        images: images,
-        stock: values.stock,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          toast.success("Thêm sản phẩm thành công", {
-            pauseOnHover: false,
-            delay: 0,
-          });
-          // reset form
-          reset();
-        } else {
-          toast.error("Thêm sản phẩm thất bại", {
-            pauseOnHover: false,
-            delay: 0,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+  const onSubmit = async (data) => {
+    try {
+      await axios.put(
+        `https://api-ebook.cyclic.app/api/products/${productId}`,
+        data
+      );
+      toast.success("Sửa sản phẩm thành công", {
+        pauseOnHover: false,
+        delay: 0,
       });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <Fragment>
       <div className="bg-darkbg rounded-xl p-5">
-        <h2 className="font-semibold text-3xl">Thêm sản phẩm</h2>
+        <h2 className="font-semibold text-3xl">Sửa thông tin sản phẩm</h2>
+        <p className="">{product.name}</p>
         <form
           className="mt-10 flex flex-col gap-3"
-          onSubmit={handleSubmit(handleAddProduct)}>
+          onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-3">
             <Label htmlFor="name">Tên sản phẩm</Label>
             <Input
@@ -267,7 +264,7 @@ const AddProduct = () => {
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-lg"
               type="submit">
-              Thêm sản phẩm
+              Cập nhật
             </button>
           </div>
         </form>
@@ -276,4 +273,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
