@@ -9,12 +9,24 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = (id) => {
     axios
-      .post(`https://api-ebook.cyclic.app/api/carts/${_id}`, {
-        quantity: 1,
-      })
+      .post(
+        `https://api-ebook.cyclic.app/api/carts/${_id}`,
+        {
+          quantity: 1,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
-        if(res.status === 200) {
+        if (res.status === 200) {
           toast.success("Thêm vào giỏ hàng thành công");
+          // get cookie from server and set to client
+          console.log(res.headers["set-cookie"]);
+          console.log(res.data);
+          // document.cookie = `cart=${res.data}; path=/;`;
+        } else {
+          toast.error("Thêm vào giỏ hàng thất bại");
         }
       });
   };
