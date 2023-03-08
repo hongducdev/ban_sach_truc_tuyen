@@ -14,9 +14,6 @@ const ProductCard = ({ product }) => {
         {
           quantity: 1,
         },
-        {
-          withCredentials: true,
-        }
       )
       .then((res) => {
         if (res.status === 200) {
