@@ -49,8 +49,8 @@ const ProductPage = () => {
             <div className="inline-flex gap-5 w-2/3 flex-1">
               <div className="inline-flex flex-col gap-2">
                 {product.images &&
-                  convertToArray(product.images).map((image) => (
-                    <div key={image} className="">
+                  convertToArray(product.images).map((image, index) => (
+                    <div key={index} className="">
                       <img
                         src={image}
                         alt={image}

@@ -3,7 +3,7 @@ import ProductCard from "../components/Product/ProductCard";
 
 const SearchPage = () => {
 
-  const [search, setSearch] = React.useState("Người trong muôn nghề");
+  const [search, setSearch] = React.useState("");
 
   return (
     <Fragment>

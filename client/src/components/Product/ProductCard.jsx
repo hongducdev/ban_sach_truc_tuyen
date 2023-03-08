@@ -1,10 +1,23 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
-
   const { _id, name, price, sale, images } = product;
   const navigate = useNavigate();
+
+  const handleAddToCart = (id) => {
+    axios
+      .post(`https://api-ebook.cyclic.app/api/carts/${_id}`, {
+        quantity: 1,
+      })
+      .then((res) => {
+        if(res.status === 200) {
+          toast.success("Thêm vào giỏ hàng thành công");
+        }
+      });
+  };
 
   return (
     <div className="select-none">
@@ -13,7 +26,9 @@ const ProductCard = ({ product }) => {
           -4%
         </div>
         <img src={images[0]} alt={name} className="max-w-[300px] rounded-lg" />
-        <button className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 right-3 font-semibold rounded-lg text-xs">
+        <button
+          className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 right-3 font-semibold rounded-lg text-xs"
+          onClick={() => handleAddToCart(_id)}>
           Thêm vào giỏ hàng
         </button>
         <button className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 left-3 font-semibold rounded-lg text-xs">
