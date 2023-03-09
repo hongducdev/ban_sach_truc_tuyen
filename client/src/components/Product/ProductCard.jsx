@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { convertCurr } from "../../../utils/convertCurr";
 
 const ProductCard = ({ product }) => {
   const { _id, name, price, sale, images } = product;
@@ -19,8 +20,10 @@ const ProductCard = ({ product }) => {
     }).then((res) => {
       if (res.status === 200) {
         toast.success("Thêm vào giỏ hàng thành công");
+        window.location.reload();
       } else if (res.status === 201) {
         toast.success("Thêm vào giỏ hàng thành công");
+        window.location.reload();
       } else {
         toast.error("Thêm vào giỏ hàng thất bại");
       }
@@ -51,10 +54,9 @@ const ProductCard = ({ product }) => {
         </Link>
         <div className="flex items-center justify-center text-center text-sm">
           <span className="font-semibold text-primary">
-            {new Intl.NumberFormat("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            }).format(price)}
+            {
+              convertCurr(price)
+            }
           </span>
           <span className=" text-gray-400 line-through ml-2">169.000đ</span>
         </div>
