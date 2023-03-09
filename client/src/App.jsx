@@ -48,7 +48,10 @@ const App = () => {
           <Route path="/admin/quan-ly-san-pham" element={<SanPhamPage />} />
           <Route path="/admin/quan-ly-don-hang" element={<DonHangPage />} />
           <Route path="/admin/add-product" element={<AddProduct />} />
-          <Route path="/admin/edit-product/:productId" element={<EditProduct />} />
+          <Route
+            path="/admin/edit-product/:productId"
+            element={<EditProduct />}
+          />
         </Route>
       </Routes>
     </Suspense>

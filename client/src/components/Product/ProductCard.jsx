@@ -8,24 +8,23 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
 
   const handleAddToCart = (id) => {
-    axios
-      .post(
-        `https://api-ebook.cyclic.app/api/carts/${_id}`,
-        {
-          quantity: 1,
-        },
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          toast.success("Thêm vào giỏ hàng thành công");
-          // get cookie from server and set to client
-          console.log(res.headers["set-cookie"]);
-          console.log(res.data);
-          // document.cookie = `cart=${res.data}; path=/;`;
-        } else {
-          toast.error("Thêm vào giỏ hàng thất bại");
-        }
-      });
+    fetch(`https://api-ebook.cyclic.app/api/carts/${_id}`, {
+      method: "POST",
+      body: JSON.stringify({ quantity: 1 }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      withCredentials: true,
+    }).then((res) => {
+      if (res.status === 200) {
+        toast.success("Thêm vào giỏ hàng thành công");
+      } else if (res.status === 201) {
+        toast.success("Thêm vào giỏ hàng thành công");
+      } else {
+        toast.error("Thêm vào giỏ hàng thất bại");
+      }
+    });
   };
 
   return (
