@@ -31,7 +31,7 @@ const PageNotFound = () => {
               Oops. The page you're looking for doesn't exist.
             </div>
             <a class="button" href="/">
-              Back Home
+              Quay lại trang chủ
             </a>
           </div>
         </div>

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { convertToArray } from "../../utils/convertToArray";
 import { LoadingSite } from "../components";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const { productID } = useParams();
@@ -37,6 +38,28 @@ const ProductPage = () => {
     if (count > 1) {
       setCount(count - 1);
     }
+  };
+
+  const handleAddCart = (id) => {
+    fetch(`https://api-ebook.cyclic.app/api/carts/${productID}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ quantity: count }),
+      credentials: "include",
+      withCredentials: true,
+    }).then((res) => {
+      if (res.status === 200) {
+        toast.success("Thêm vào giỏ hàng thành công");
+        window.location.reload();
+      } else if (res.status === 201) {
+        toast.success("Thêm vào giỏ hàng thành công");
+        window.location.reload();
+      } else {
+        toast.error("Thêm vào giỏ hàng thất bại");
+      }
+    });
   };
 
   return (
@@ -139,7 +162,9 @@ const ProductPage = () => {
               {/* button */}
               <div className="flex items-center gap-2">
                 {quantity > 0 ? (
-                  <button className="w-1/2 h-12 rounded-md bg-error text-white text-lg font-semibold">
+                  <button
+                    className="w-1/2 h-12 rounded-md bg-error text-white text-lg font-semibold"
+                    onClick={() => handleAddCart()}>
                     Thêm vào giỏ hàng
                   </button>
                 ) : (

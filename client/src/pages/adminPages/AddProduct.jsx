@@ -103,7 +103,8 @@ const AddProduct = () => {
         <h2 className="font-semibold text-3xl">Thêm sản phẩm</h2>
         <form
           className="mt-10 flex flex-col gap-3"
-          onSubmit={handleSubmit(handleAddProduct)}>
+          onSubmit={handleSubmit(handleAddProduct)}
+        >
           <div className="flex flex-col gap-3">
             <Label htmlFor="name">Tên sản phẩm</Label>
             <Input
@@ -156,17 +157,16 @@ const AddProduct = () => {
             <Label htmlFor="category">Danh mục</Label>
             <Dropdown>
               <Dropdown.Select
-                placeholder={getDropdownLabel(
-                  "category",
-                  "Select category"
-                )}></Dropdown.Select>
-              <Dropdown.List>
+                placeholder={getDropdownLabel("category", "Select category")}
+              ></Dropdown.Select>
+              <Dropdown.List classNames="bg-darkSecondary">
                 {categoriesData.map((category) => (
                   <Dropdown.Option
                     key={category}
                     onClick={() =>
                       handleSelectDropdownOption("category", category)
-                    }>
+                    }
+                  >
                     <span className="capitalize">{category}</span>
                   </Dropdown.Option>
                 ))}
@@ -266,7 +266,8 @@ const AddProduct = () => {
           <div className="my-5 flex justify-end">
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-              type="submit">
+              type="submit"
+            >
               Thêm sản phẩm
             </button>
           </div>

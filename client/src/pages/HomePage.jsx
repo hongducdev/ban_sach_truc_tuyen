@@ -3,6 +3,7 @@ import { Banner } from "../components";
 import Category from "../components/Category/Category";
 import ProductCard from "../components/Product/ProductCard";
 import ProductList from "../components/Product/ProductList";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -13,11 +14,10 @@ const HomePage = () => {
         <div className="mt-10"></div>
         <ProductList />
         <div className="mt-10"></div>
-        <button className="button uppercase">
-          Xem thêm sản phẩm
-        </button>
+        <Link to="/products">
+          <button className="button uppercase">Xem thêm sản phẩm</button>
+        </Link>
       </div>
-      <h1>Home Page</h1>
     </Fragment>
   );
 };

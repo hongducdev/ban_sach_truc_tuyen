@@ -123,7 +123,7 @@ const CartPage = () => {
         <div className="flex items-start justify-between gap-x-5">
           <div className="w-4/6 bg-strock rounded-xl">
             {loading ? (
-              <div className="flex items-center justify-center py-10">
+              <div className="flex items-center justify-center py-10 bg-whiteSoft">
                 <Loading />
               </div>
             ) : cart && cart.length > 0 ? (
@@ -138,8 +138,9 @@ const CartPage = () => {
                       className="w-16 h-16 object-cover"
                     />
                     <p className="text-text2 font-medium max-w-[300px]">
-                      Người Trong Muôn Nghề - Định hướng nghề nghiệp toàn diện
-                      (Tái Bản 2023)
+                      {
+                        item.product.name
+                      }
                     </p>
                   </div>
                   <div className="flex items-center gap-x-2">

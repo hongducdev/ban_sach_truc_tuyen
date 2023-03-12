@@ -11,6 +11,7 @@ const ProductPage = lazy(() => import("./pages/ProductPage"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const CheckOutPage = lazy(() => import("./pages/CheckOutPage"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
+const Products = lazy(() => import("./pages/ProductsPage"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const AdminLoginPage = lazy(() => import("./pages/adminPages/AdminLoginPage"));
@@ -36,6 +37,7 @@ const App = () => {
           <Route
             path="/collection/:slug"
             element={<CollectionPage></CollectionPage>}></Route>
+          <Route path="/products" element={<Products></Products>}></Route>
           <Route
             path="/product/:productID"
             element={<ProductPage></ProductPage>}></Route>

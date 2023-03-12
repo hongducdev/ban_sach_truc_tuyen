@@ -30,6 +30,28 @@ const ProductCard = ({ product }) => {
     });
   };
 
+  const handleToPay = (id) => {
+    fetch(`https://api-ebook.cyclic.app/api/carts/${_id}`, {
+      method: "POST",
+      body: JSON.stringify({ quantity: 1 }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      withCredentials: true,
+    }).then((res) => {
+      if (res.status === 200) {
+        navigate("/thanh-toan");
+        window.location.reload();
+      } else if (res.status === 201) {
+        navigate("/thanh-toan");
+        window.location.reload();
+      } else {
+        toast.error("Thao tác thất bại");
+      }
+    });
+  };
+
   return (
     <div className="select-none">
       <div className="relative inline-block">
@@ -42,7 +64,9 @@ const ProductCard = ({ product }) => {
           onClick={() => handleAddToCart(_id)}>
           Thêm vào giỏ hàng
         </button>
-        <button className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 left-3 font-semibold rounded-lg text-xs">
+        <button
+          className="uppercase text-white bg-softDark py-2 px-3 absolute bottom-3 left-3 font-semibold rounded-lg text-xs"
+          onClick={() => handleToPay(_id)}>
           Mua ngay
         </button>
       </div>
@@ -54,9 +78,7 @@ const ProductCard = ({ product }) => {
         </Link>
         <div className="flex items-center justify-center text-center text-sm">
           <span className="font-semibold text-primary">
-            {
-              convertCurr(price)
-            }
+            {convertCurr(price)}
           </span>
           <span className=" text-gray-400 line-through ml-2">169.000đ</span>
         </div>

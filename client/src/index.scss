@@ -52,25 +52,8 @@
 }
 
 .button:hover {
-  color: #fff;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -50px;
-  width: 150%;
-  height: 100%;
   background-color: #1dc071;
-  transform: scaleX(0) skewX(35deg);
-  transform-origin: left;
-  z-index: -1;
-  transition: transform 1s;
-}
-
-.button:hover::before {
-  transform: scaleX(1) skewX(35deg);
+  color: #fff;
 }
 
 .wrapper {

@@ -3,7 +3,7 @@ import ProductCard from "../components/Product/ProductCard";
 
 const CollectionPage = () => {
   return (
-    <Fragment className="bg-white">
+    <Fragment>
       <img
         src="/nhom-san-pham---tu-sach-huong-nghiep_e58bb7a06d4e4f54a7f5e569edd26464.webp"
         alt=""
@@ -35,7 +35,6 @@ const CollectionPage = () => {
           </div>
         </div>
       </div>
-      <h1>Collection Page</h1>
     </Fragment>
   );
 };
