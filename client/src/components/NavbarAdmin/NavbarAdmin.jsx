@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineLineChart } from "react-icons/ai";
 import { BsFillJournalBookmarkFill, BsCartCheck } from "react-icons/bs";
+import { useAdminStore } from "../../store/adminStore";
 
 const NavbarMenu = [
   {
@@ -25,6 +26,14 @@ const baseClasses =
   "flex items-center px-4 py-4 text-whiteSoft hover:text-whiteSoft hover:bg-darkStroke hover:duration-300 hover:ease-in-out";
 
 const NavbarAdmin = () => {
+  const navigate = useNavigate();
+  const { adminLogout } = useAdminStore();
+
+  const handleLogout = () => {
+    adminLogout();
+    navigate("/login");
+  };
+
   return (
     <div className="w-full h-full">
       <Link to="/admin" className="block">
@@ -41,12 +50,16 @@ const NavbarAdmin = () => {
               isActive
                 ? `${baseClasses} bg-darkStroke text-whiteSoft border-l-2 border-secondary`
                 : `${baseClasses} `
-            }>
+            }
+          >
             <span className="mr-2">{item.icon}</span>
             <span>{item.name}</span>
           </NavLink>
         ))}
       </div>
+      <button className="button ml-4 mt-10" onClick={handleLogout}>
+        Đăng xuất
+      </button>
     </div>
   );
 };

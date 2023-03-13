@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/Input/Input";
 import { AdminContext } from "../../context/AdminContext";
@@ -26,6 +26,8 @@ const AdminLoginPage = () => {
   });
 
   const { setAdminInfo } = useContext(AdminContext);
+  const [redirect, setRedirect] = useState(false);
+  const { admin, setAdmin } = useAdminStore((state) => state);
 
   useEffect(() => {
     const arrErroes = Object.values(errors);
@@ -40,8 +42,8 @@ const AdminLoginPage = () => {
   const handleLoginAdmin = (data) => {
     if (data.username === "admin" && data.password === "admin") {
       setAdminInfo(data);
-      // lưu dữ liệu vào useAdminStore
-      useAdminStore.setState(data);
+      setRedirect(true);
+      setAdmin(data);
       toast.success("Đăng nhập thành công");
       navigate("/admin");
     } else {
@@ -56,7 +58,8 @@ const AdminLoginPage = () => {
     <div className="h-screen w-screen flex items-center justify-center">
       <form
         className="w-[500px] flex flex-col gap-4 text-center bg-white shadow-xl p-10 rounded-xl"
-        onSubmit={handleSubmit(handleLoginAdmin)}>
+        onSubmit={handleSubmit(handleLoginAdmin)}
+      >
         <h1 className="text-4xl font-bold">Admin</h1>
         <Input
           name="username"

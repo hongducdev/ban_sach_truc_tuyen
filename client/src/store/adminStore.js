@@ -1,6 +1,7 @@
-import {create} from 'zustand';
+import { create } from "zustand";
 
 export const useAdminStore = create((set) => ({
-  admin: null,
-  setAdmin: (admin) => set({admin}),
+  admin: {},
+  setAdmin: (admin) => set({ admin }),
+  adminLogout: () => set({ admin: {} }),
 }));
