@@ -25,7 +25,7 @@ const EditProduct = lazy(() => import("./pages/adminPages/EditProduct"));
 
 
 const App = () => {
-  // khi nào vào bất kì trang nào có path là /admin sẽ kiểm tra xem có adminInfo hay không nếu có thì cho vào trang đó nếu không thì sẽ chuyển hướng về trang login
+
   const navigate = useNavigate();
   const { adminInfo } = useContext(AdminContext);
   useEffect(() => {

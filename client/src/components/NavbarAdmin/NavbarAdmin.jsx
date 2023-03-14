@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineLineChart } from "react-icons/ai";
 import { BsFillJournalBookmarkFill, BsCartCheck } from "react-icons/bs";
