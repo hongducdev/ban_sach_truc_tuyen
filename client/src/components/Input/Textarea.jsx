@@ -9,7 +9,7 @@ const Textarea = ({ name = "", className, control, ...props }) => {
   });
 
   const classes =
-    "w-full p-4 text-base text-black transition-all border rounded-lg outline-none focus:border-blue-500 border-slate-700 min-h-[100px]";
+    "w-full p-4 text-base text-black transition-all border rounded-lg outline-none focus:border-primary border-slate-700 min-h-[100px]";
 
   return (
     <textarea

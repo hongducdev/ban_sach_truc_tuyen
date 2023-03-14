@@ -13,7 +13,7 @@ const Input = ({ name = "", type = "text", className, control, ...props }) => {
   }
 
   const classes =
-    "w-full p-4 text-base text-black transition-all border rounded-lg outline-none focus:border-blue-500 border-slate-700";
+    "w-full p-4 text-base text-black transition-all border rounded-lg outline-none focus:border-primary border-slate-700";
 
   return (
     <div className="relative w-full">
