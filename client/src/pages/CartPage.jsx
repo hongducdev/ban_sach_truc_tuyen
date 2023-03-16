@@ -130,7 +130,8 @@ const CartPage = () => {
               cart.map((item) => (
                 <div
                   className="flex items-center justify-between bg-whiteSoft p-2 border-b border-dashed"
-                  key={item._id}>
+                  key={item._id}
+                >
                   <div className="flex items-center gap-4">
                     <img
                       src={item.product.images[0]}
@@ -138,9 +139,7 @@ const CartPage = () => {
                       className="w-16 h-16 object-cover"
                     />
                     <p className="text-text2 font-medium max-w-[300px]">
-                      {
-                        item.product.name
-                      }
+                      {item.product.name}
                     </p>
                   </div>
                   <div className="flex items-center gap-x-2">
@@ -148,7 +147,8 @@ const CartPage = () => {
                       className="w-9 h-7 bg-strock rounded-md"
                       onClick={() =>
                         handlePlusProduct(item.product._id, item.quantity)
-                      }>
+                      }
+                    >
                       +
                     </button>
                     <input
@@ -160,7 +160,8 @@ const CartPage = () => {
                       className="w-9 h-7 bg-strock rounded-md"
                       onClick={() =>
                         handleMinusProduct(item.product._id, item.quantity)
-                      }>
+                      }
+                    >
                       -
                     </button>
                   </div>
@@ -171,14 +172,16 @@ const CartPage = () => {
                       {convertCurr(item.product.price * item.quantity)}
                     </p>
                     <button
-                      onClick={() => handleDeleteProduct(item.product._id)}>
+                      onClick={() => handleDeleteProduct(item.product._id)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="w-6 h-6">
+                        className="w-6 h-6"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -210,11 +213,20 @@ const CartPage = () => {
                 <div className="text-text1">{convertCurr(total)}</div>
               </div>
               <div className="py-5">
-                <Link to="/thanh-toan">
-                  <button className="w-full py-3 text-white bg-primary rounded-md">
-                  Tiến hành thanh toán
-                </button>
-                </Link>
+                {cart && cart.length > 0 ? (
+                  <Link to="/thanh-toan">
+                    <button className="w-full py-3 text-white bg-primary rounded-md">
+                      Tiến hành thanh toán
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    className="w-full py-3 text-white bg-primary rounded-md"
+                    disabled
+                  >
+                    Tiến hành thanh toán
+                  </button>
+                )}
               </div>
             </div>
           </div>

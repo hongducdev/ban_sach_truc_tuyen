@@ -9,7 +9,19 @@ import { convertCurr } from "../../utils/convertCurr";
 import { Loading } from "../components";
 import { Dropdown } from "../components/dropdown";
 
-const categoriesData = ["Thanh toán khi nhận hàng", "Thanh toán trực tuyến qua VNPAY"];
+const categoriesData = [
+  "Thanh toán khi nhận hàng",
+  "Thanh toán trực tuyến qua VNPAY",
+];
+
+const schema = yup.object({
+  name: yup.string().required("Vui lòng nhập họ và tên"),
+  phone: yup.string().required("Vui lòng nhập số điện thoại"),
+  address: yup.string().required("Vui lòng nhập địa chỉ"),
+  email: yup.string().required("Vui lòng nhập email"),
+  note: yup.string().required("Vui lòng nhập ghi chú"),
+  payment: yup.string().required("Vui lòng chọn phương thức thanh toán"),
+});
 
 const CheckOutPage = () => {
   const {
@@ -19,11 +31,15 @@ const CheckOutPage = () => {
     reset,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+  });
 
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [onlinePayment, setOnlinePayment] = useState(false);
 
   const getDropdownLabel = (name, defaultValue = "") => {
     const value = watch(name) || defaultValue;
@@ -32,6 +48,9 @@ const CheckOutPage = () => {
 
   const handleSelectDropdownOption = (name, value) => {
     setValue(name, value);
+    if (value === "Thanh toán trực tuyến qua VNPAY") {
+      setOnlinePayment(true);
+    }
   };
 
   useEffect(() => {
@@ -74,6 +93,31 @@ const CheckOutPage = () => {
     return result;
   };
 
+  const handleOrder = (data) => {
+    fetch("https://api-ebook.cyclic.app/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      withCredentials: true,
+      body: JSON.stringify({
+        ...data,
+        captcha: randomString(),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Đặt hàng thành công", {
+          pauseOnHover: false,
+          delay: 0,
+        });
+        reset();
+        setProducts([]);
+        setTotal(0);
+      });
+  };
+
   return (
     <div className="bg-white">
       <div className="container">
@@ -89,7 +133,7 @@ const CheckOutPage = () => {
           <div className="flex">
             <div className="w-1/2">
               <h2 className="">Thông tin giao hàng</h2>
-              <form action="">
+              <form onSubmit={handleSubmit(handleOrder)}>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="name">Họ và tên</Label>
                   <Input
@@ -97,7 +141,8 @@ const CheckOutPage = () => {
                     name="name"
                     id="name"
                     placeholder="Họ và tên"
-                    control={control}></Input>
+                    control={control}
+                  ></Input>
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="phone">Số điện thoại</Label>
@@ -106,7 +151,8 @@ const CheckOutPage = () => {
                     name="phone"
                     id="phone"
                     placeholder="Số điện thoại"
-                    control={control}></Input>
+                    control={control}
+                  ></Input>
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="address">Địa chỉ</Label>
@@ -115,7 +161,8 @@ const CheckOutPage = () => {
                     name="address"
                     id="address"
                     placeholder="Địa chỉ"
-                    control={control}></Input>
+                    control={control}
+                  ></Input>
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="email">Email</Label>
@@ -124,7 +171,8 @@ const CheckOutPage = () => {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    control={control}></Input>
+                    control={control}
+                  ></Input>
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="note">Ghi chú</Label>
@@ -133,7 +181,8 @@ const CheckOutPage = () => {
                     name="note"
                     id="note"
                     placeholder="Ghi chú"
-                    control={control}></Input>
+                    control={control}
+                  ></Input>
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="payment">Phương thức thanh toán</Label>
@@ -142,33 +191,66 @@ const CheckOutPage = () => {
                       placeholder={getDropdownLabel(
                         "category",
                         "Lựa chọn phương thức thanh toán"
-                      )}></Dropdown.Select>
+                      )}
+                    ></Dropdown.Select>
                     <Dropdown.List classNames="bg-whiteSoft">
                       {categoriesData.map((category) => (
                         <Dropdown.Option
                           key={category}
                           onClick={() =>
                             handleSelectDropdownOption("category", category)
-                          }>
+                          }
+                        >
                           <span className="capitalize">{category}</span>
                         </Dropdown.Option>
                       ))}
                     </Dropdown.List>
                   </Dropdown>
                 </div>
-                <div className="my-3 flex flex-col gap-y-2">
-                  {/* mã chuyển khoản */}
-                  <Label htmlFor="payment">Mã chuyển khoản</Label>
-                  <p className="">
-                    Chuyển khoản với nội dung: EBOOK - {randomString()}
-                  </p>
-                </div>
+                {onlinePayment && (
+                  <>
+                    <div className="my-3 flex flex-col gap-y-2">
+                      <Label htmlFor="payment">QR thanh toán</Label>
+                      <img
+                        src="https://cdn.discordapp.com/attachments/1074219605414903948/1085913138257465435/Screenshot_20230316-200751_MoMo.png"
+                        alt="qr_code"
+                        className="w-[300px]"
+                      />
+                    </div>
+                    <div className="my-3 flex flex-col gap-y-2">
+                      <Label htmlFor="payment">Mã chuyển khoản</Label>
+                      <p className="">
+                        Chủ tài khoản: <strong>Nguyễn Hồng Đức</strong>
+                        <br />
+                        Số tài khoản: <strong>0916157704</strong>
+                        <br />
+                        Chuyển khoản với nội dung:{" "}
+                        <strong>EBOOK-{randomString()}</strong>
+                        <br />
+                        (Lưu ý: Chuyển khoản đúng nội dung để đơn hàng được xử
+                        lý nhanh nhất, không chuyển khoản sai nội dung sẽ không
+                        được xử lý)
+                      </p>
+                    </div>
+                  </>
+                )}
                 <div className="">
-                  <button
-                    type="submit"
-                    className="w-full py-4 mt-4 text-lg font-bold text-white transition-all duration-200 ease-linear bg-primary rounded-lg shadow outline-none hover:shadow-lg focus:outline-none">
-                    Đặt hàng
-                  </button>
+                  {products ? (
+                    <button
+                      type="submit"
+                      className="w-full py-4 mt-4 text-lg font-bold text-white transition-all duration-200 ease-linear bg-primary rounded-lg shadow outline-none hover:shadow-lg focus:outline-none"
+                    >
+                      Đặt hàng
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      type="submit"
+                      className="w-full py-4 mt-4 text-lg font-bold text-white transition-all duration-200 ease-linear bg-primary rounded-lg shadow outline-none hover:shadow-lg focus:outline-none"
+                    >
+                      Đặt hàng
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
@@ -178,7 +260,8 @@ const CheckOutPage = () => {
                 products.map((item) => (
                   <div
                     className="flex items-center justify-between border-b border-dashed py-2"
-                    key={item._id}>
+                    key={item._id}
+                  >
                     <div className="flex items-center gap-5">
                       <img
                         src={item.product.images[0]}
