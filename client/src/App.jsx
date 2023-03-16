@@ -71,7 +71,7 @@ const App = () => {
               element={<CheckOutPage></CheckOutPage>}
             ></Route>
             <Route
-              path="/collection/:slug"
+              path="/collection/:collectionID"
               element={<CollectionPage></CollectionPage>}
             ></Route>
             <Route path="/products" element={<Products></Products>}></Route>

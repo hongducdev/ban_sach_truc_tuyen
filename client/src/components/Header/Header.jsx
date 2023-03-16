@@ -9,11 +9,11 @@ const HeaderList = [
   },
   {
     name: "Tủ sách hướng nghiệp",
-    path: "/collection/tu-sach-huong-nghiep",
+    path: "/collection/sách hướng nghiệp",
   },
   {
     name: "Tủ sách triết học",
-    path: "/tu-sach-triet-hoc",
+    path: "/collection/sách triết học",
   },
   {
     name: "Liên hệ",

@@ -25,7 +25,7 @@ const schema = yup.object({
   stock: yup.number().required("Số lượng không được để trống"),
 });
 
-const categoriesData = ["architecture", "education"];
+const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
 
 const AddProduct = () => {
   const {
@@ -157,7 +157,7 @@ const AddProduct = () => {
             <Label htmlFor="category">Danh mục</Label>
             <Dropdown>
               <Dropdown.Select
-                placeholder={getDropdownLabel("category", "Select category")}
+                placeholder={getDropdownLabel("category", "Chọn danh mục")}
               ></Dropdown.Select>
               <Dropdown.List classNames="bg-darkSecondary">
                 {categoriesData.map((category) => (
