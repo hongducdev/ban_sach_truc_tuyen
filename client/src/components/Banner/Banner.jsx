@@ -11,16 +11,12 @@ import { Link } from "react-router-dom";
 
 const ImageArr = [
   {
-    src: "/ecom_book.png",
-    path: "/",
-  },
-  {
     src: "/nguoi_trong_muon_nghe.png",
-    path: "/",
+    path: "/collection/sách%20hướng%20nghiệp",
   },
   {
     src: "/seneca.png",
-    path: "/",
+    path: "collection/s%C3%A1ch%20tri%E1%BA%BFt%20h%E1%BB%8Dc",
   },
 ];
 

@@ -91,7 +91,9 @@ const CheckOutPage = () => {
     return result;
   };
 
-  const handleOrder = (data) => {
+  const handleOrder = (values) => {
+    const captcha = onlinePayment ? randomString() : "";
+
     fetch("https://api-ebook.cyclic.app/api/orders", {
       method: "POST",
       headers: {
@@ -100,8 +102,8 @@ const CheckOutPage = () => {
       credentials: "include",
       withCredentials: true,
       body: JSON.stringify({
-        ...data,
-        captcha: randomString(),
+        ...values,
+        captcha,
       }),
     })
       .then((res) => res.json())

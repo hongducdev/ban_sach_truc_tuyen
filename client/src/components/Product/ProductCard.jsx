@@ -78,7 +78,6 @@ const ProductCard = ({ product }) => {
           <span className="font-semibold text-primary">
             {convertCurr(price)}
           </span>
-          <span className=" text-gray-400 line-through ml-2">169.000đ</span>
         </div>
       </div>
     </div>

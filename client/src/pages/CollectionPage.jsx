@@ -39,7 +39,6 @@ const CollectionPage = () => {
         className=""
       />
       <div className="container py-20 flex ">
-        <div className="w-[400px]">Phân loại</div>
         <div className="">
           <h1 className="font-bold text-3xl">
             {collectionID === "sách hướng nghiệp"
@@ -54,7 +53,7 @@ const CollectionPage = () => {
             ) : (
               <>
                 {products && products.length > 0 ? (
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-4 gap-3">
                     {products.map((product, index) => (
                       <ProductCard key={index} product={product} />
                     ))}

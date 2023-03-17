@@ -23,7 +23,6 @@ const Products = () => {
         className=""
       />
       <div className="container mt-10 flex ">
-        <div className="w-[400px]">Phân loại</div>
         <div className="">
           <h1 className="font-bold text-3xl">Sản phẩm nổi bật</h1>
           <div className="mt-8">
@@ -32,7 +31,7 @@ const Products = () => {
                 <Loading />
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-4 gap-3">
                 {products.map((product) => (
                   <ProductCard product={product} />
                 ))}

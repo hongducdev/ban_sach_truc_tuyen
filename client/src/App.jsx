@@ -22,6 +22,7 @@ const SanPhamPage = lazy(() => import("./pages/adminPages/SanPhamPage"));
 const DonHangPage = lazy(() => import("./pages/adminPages/DonHangPage"));
 const AddProduct = lazy(() => import("./pages/adminPages/AddProduct"));
 const EditProduct = lazy(() => import("./pages/adminPages/EditProduct"));
+const OrderDetailPage = lazy(() => import("./pages/adminPages/OrderDetailPage"));
 
 
 const App = () => {
@@ -54,6 +55,10 @@ const App = () => {
               <Route
                 path="/admin/edit-product/:productId"
                 element={<EditProduct />}
+              />
+              <Route
+                path="/admin/order/:orderId"
+                element={<OrderDetailPage />}
               />
             </Route>
           </Routes>

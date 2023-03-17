@@ -48,7 +48,8 @@ const SanPhamPage = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6">
+                className="w-6 h-6"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -68,6 +69,7 @@ const SanPhamPage = () => {
               <table className="w-full border-strock border">
                 <thead className="border-strock border">
                   <tr className="border-strock border">
+                    <th className="text-left border-strock border p-3">STT</th>
                     <th className="text-left border-strock border p-3">
                       Tên sản phẩm
                     </th>
@@ -81,11 +83,13 @@ const SanPhamPage = () => {
                   </tr>
                 </thead>
                 <tbody className="border-strock border">
-                  {
-                    // map products
-                    products.map((product) => {
+                  {products.length > 0 ? (
+                    products.map((product, index) => {
                       return (
                         <tr className="border-strock border" key={product._id}>
+                          <td className="text-center border-strock border p-3">
+                            {index + 1}
+                          </td>
                           <td className="text-left border-strock border p-3">
                             {product.name}
                           </td>
@@ -107,7 +111,8 @@ const SanPhamPage = () => {
                                   viewBox="0 0 24 24"
                                   strokeWidth="1.5"
                                   stroke="currentColor"
-                                  className="w-6 h-6">
+                                  className="w-6 h-6"
+                                >
                                   <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -118,14 +123,16 @@ const SanPhamPage = () => {
                             </Link>
                             <button
                               className="bg-red-500 text-white p-2 rounded-xl"
-                              onClick={() => handleDeleteProduct(product._id)}>
+                              onClick={() => handleDeleteProduct(product._id)}
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 strokeWidth="1.5"
                                 stroke="currentColor"
-                                className="w-6 h-6">
+                                className="w-6 h-6"
+                              >
                                 <path
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
@@ -137,7 +144,16 @@ const SanPhamPage = () => {
                         </tr>
                       );
                     })
-                  }
+                  ) : (
+                    <tr className="border-strock border">
+                      <td
+                        className="text-center border-strock border p-3"
+                        colSpan="5"
+                      >
+                        Không có sản phẩm nào
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

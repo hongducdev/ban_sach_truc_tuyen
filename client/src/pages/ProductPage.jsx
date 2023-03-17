@@ -26,7 +26,7 @@ const ProductPage = () => {
         setQuantity(res.data.stock);
         setLoading(false);
       });
-  }, []);
+  }, [productID]);
 
   const handleAdd = () => {
     if (count < quantity) {
