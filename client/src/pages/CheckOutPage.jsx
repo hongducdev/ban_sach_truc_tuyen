@@ -19,8 +19,6 @@ const schema = yup.object({
   phone: yup.string().required("Vui lòng nhập số điện thoại"),
   address: yup.string().required("Vui lòng nhập địa chỉ"),
   email: yup.string().required("Vui lòng nhập email"),
-  note: yup.string().required("Vui lòng nhập ghi chú"),
-  payment: yup.string().required("Vui lòng chọn phương thức thanh toán"),
 });
 
 const CheckOutPage = () => {

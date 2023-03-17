@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import axios from "axios";
 import Loading from "../Loading/Loading";
 
 // Import Swiper styles
@@ -17,10 +16,19 @@ const ProductList = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("https://api-ebook.cyclic.app/api/products").then((res) => {
-      setProducts(res.data);
-      setLoading(false);
-    });
+    fetch("https://api-ebook.cyclic.app/api/products", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      withCredentials: true,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      });
   }, []);
 
   return (
