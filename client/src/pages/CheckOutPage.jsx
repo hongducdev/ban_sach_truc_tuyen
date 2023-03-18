@@ -22,6 +22,9 @@ const schema = yup.object({
 });
 
 const CheckOutPage = () => {
+
+  document.title = "Thanh toán - EBook";
+
   const {
     handleSubmit,
     control,

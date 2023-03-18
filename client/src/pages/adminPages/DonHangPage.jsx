@@ -12,6 +12,9 @@ const status = {
 };
 
 const DonHangPage = () => {
+
+  document.title = "Quản lý đơn hàng - EBook";
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 

@@ -4,6 +4,8 @@ import { AdminContext } from '../../context/AdminContext';
 
 const AdminHomePage = () => {
 
+  document.title = "Admin - EBook";
+
   const { adminInfo, setAdminInfo } = useContext(AdminContext);
 
   return (

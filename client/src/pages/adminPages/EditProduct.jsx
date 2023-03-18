@@ -29,6 +29,9 @@ const schema = yup.object({
 const categoriesData = ["architecture", "education"];
 
 const EditProduct = () => {
+
+  document.title = "Sửa sản phẩm - EBook";
+
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
 

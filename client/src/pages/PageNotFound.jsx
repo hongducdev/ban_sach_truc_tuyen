@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 
 const PageNotFound = () => {
+
+  document.title = "404 - EBook";
+
   return (
     <Fragment>
       <div className="bg-white">

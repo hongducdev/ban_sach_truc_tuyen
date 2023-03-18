@@ -28,6 +28,10 @@ const ProductPage = () => {
       });
   }, [productID]);
 
+  useEffect(() => {
+    document.title = `${product.name} - EBook`;
+  }, [product]);
+
   const handleAdd = () => {
     if (count < quantity) {
       setCount(count + 1);

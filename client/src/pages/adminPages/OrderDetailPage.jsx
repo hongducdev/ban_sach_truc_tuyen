@@ -13,6 +13,9 @@ const status = {
 };
 
 const OrderDetailPage = () => {
+
+  document.title = "Quản lý đơn hàng - EBook";
+
   const { orderId } = useParams();
   const navigate = useNavigate();
 

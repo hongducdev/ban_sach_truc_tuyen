@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 
 const SanPhamPage = () => {
+
+  document.title = "Quản lý sản phẩm - EBook";
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 

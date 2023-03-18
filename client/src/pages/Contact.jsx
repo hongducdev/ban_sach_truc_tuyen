@@ -13,6 +13,9 @@ const schema = yup.object({
 })
 
 const Contact = () => {
+
+  document.title = "Liên hệ - EBook";
+
   const {
     control,
     handleSubmit,

@@ -28,6 +28,9 @@ const schema = yup.object({
 const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
 
 const AddProduct = () => {
+
+  document.title = "Thêm sản phẩm - EBook";
+
   const {
     handleSubmit,
     control,

@@ -12,6 +12,9 @@ const status = {
 };
 
 const DoanhThuPage = () => {
+
+  document.title = "Quản lý doanh thu - EBook";
+
   const [doanhThu, setDoanhThu] = useState([]);
   const [loading, setLoading] = useState(false);
 

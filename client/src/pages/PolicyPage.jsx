@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 
 const PolicyPage = () => {
+
+  document.title = "Pháp lý & Câu hỏi - EBook";
+
   return (
     <Fragment>
       <div className="container py-20">

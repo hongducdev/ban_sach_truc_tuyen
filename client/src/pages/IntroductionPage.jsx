@@ -37,6 +37,9 @@ const members = [
 ];
 
 const IntroductionPage = () => {
+
+  document.title = "Giới thiệu - EBook";
+
   return (
     <Fragment>
       <div className="container my-20">

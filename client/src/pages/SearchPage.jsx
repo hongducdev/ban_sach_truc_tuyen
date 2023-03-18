@@ -5,6 +5,9 @@ import axios from "axios";
 import { debounce } from "lodash";
 
 const SearchPage = () => {
+
+  document.title = "Tìm kiếm - EBook";
+
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState([]);

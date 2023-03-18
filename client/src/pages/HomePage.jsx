@@ -6,6 +6,9 @@ import ProductList from "../components/Product/ProductList";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
+
+  document.title = "Trang chủ - EBook";
+
   return (
     <Fragment>
       <Banner />

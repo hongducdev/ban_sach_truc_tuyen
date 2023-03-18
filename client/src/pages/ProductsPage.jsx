@@ -4,6 +4,9 @@ import ProductCard from "../components/Product/ProductCard";
 import Loading from "../components/Loading/Loading";
 
 const Products = () => {
+
+  document.title = "Tất cả sản phẩm -EBook";
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +22,7 @@ const Products = () => {
     <Fragment>
       <img
         src="https://file.hstatic.net/200000123069/file/banner-tu-sach-nhen_c73742d0956340cb8f354a74d02d47ee.jpg"
-        alt=""
+        alt="Products"
         className=""
       />
       <div className="container mt-10 flex ">

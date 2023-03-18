@@ -25,6 +25,15 @@ const CollectionPage = () => {
       });
   }, [collectionID]);
 
+  // hàm viết hoa chữ cái đầu tiên
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  React.useEffect(() => {
+    document.title = `${capitalizeFirstLetter(collectionID)} - EBook`;
+  }, [collectionID]);
+
   return (
     <Fragment>
       <img
@@ -34,7 +43,9 @@ const CollectionPage = () => {
             : "/nhom-san-pham---chu-nghia-khac-ky_894bdcf3d3ff4633a156d95384a2feac.webp"
         }
         alt={
-          collectionID === "sách hướng nghiệp" ? "Tủ sách hướng nghiệp" : "Tủ sách triết học"
+          collectionID === "sách hướng nghiệp"
+            ? "Tủ sách hướng nghiệp"
+            : "Tủ sách triết học"
         }
         className=""
       />
