@@ -20,8 +20,10 @@ const ProductCard = ({ product }) => {
     }).then((res) => {
       if (res.status === 200) {
         toast.success("Thêm vào giỏ hàng thành công");
+        window.location.reload();
       } else if (res.status === 201) {
         toast.success("Thêm vào giỏ hàng thành công");
+        window.location.reload();
       } else {
         toast.error("Thêm vào giỏ hàng thất bại");
       }

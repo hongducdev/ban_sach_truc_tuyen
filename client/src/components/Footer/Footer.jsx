@@ -36,17 +36,17 @@ const ContactList = [
 const QuestionList = [
   {
     name: "Giới thiệu",
-    path: "/",
+    path: "/gioi-thieu",
   },
   {
     name: "Pháp lý & Câu hỏi",
-    path: "/",
+    path: "/chinh-sach",
   },
   {
     name: "Tủ sách",
-    path: "/",
+    path: "/products",
   },
-]
+];
 
 const Footer = () => {
   return (

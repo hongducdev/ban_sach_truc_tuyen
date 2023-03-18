@@ -36,7 +36,7 @@ const Header = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setLenghtCart(data?.products?.length);
+        setLenghtCart(data?.products.length);
       });
   }, []);
 

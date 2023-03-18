@@ -14,6 +14,8 @@ const CheckOutPage = lazy(() => import("./pages/CheckOutPage"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
 const Products = lazy(() => import("./pages/ProductsPage"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const IntroductionPage = lazy(() => import("./pages/IntroductionPage"));
+const PolicyPage = lazy(() => import("./pages/PolicyPage"));
 
 const AdminLoginPage = lazy(() => import("./pages/adminPages/AdminLoginPage"));
 const AdminHomePage = lazy(() => import("./pages/adminPages/AdminHomePage"));
@@ -22,11 +24,11 @@ const SanPhamPage = lazy(() => import("./pages/adminPages/SanPhamPage"));
 const DonHangPage = lazy(() => import("./pages/adminPages/DonHangPage"));
 const AddProduct = lazy(() => import("./pages/adminPages/AddProduct"));
 const EditProduct = lazy(() => import("./pages/adminPages/EditProduct"));
-const OrderDetailPage = lazy(() => import("./pages/adminPages/OrderDetailPage"));
-
+const OrderDetailPage = lazy(() =>
+  import("./pages/adminPages/OrderDetailPage")
+);
 
 const App = () => {
-
   const navigate = useNavigate();
   const { adminInfo } = useContext(AdminContext);
   useEffect(() => {
@@ -84,6 +86,9 @@ const App = () => {
               path="/product/:productID"
               element={<ProductPage></ProductPage>}
             ></Route>
+            <Route path="/gioi-thieu" element={<IntroductionPage />}></Route>
+            <Route path="/chinh-sach" element={<PolicyPage />}></Route>
+            <Route path="*" element={<PageNotFound />}></Route>
           </Route>
         </Routes>
       </Suspense>
