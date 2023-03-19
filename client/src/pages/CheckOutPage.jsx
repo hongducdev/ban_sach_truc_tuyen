@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { convertCurr } from "../../utils/convertCurr";
 import { Loading } from "../components";
 import { Dropdown } from "../components/dropdown";
+import { useNavigate } from "react-router-dom";
 
 const categoriesData = ["Thanh toán khi nhận hàng", "Thanh toán trực tuyến"];
 
@@ -19,6 +20,8 @@ const schema = yup.object({
 });
 
 const CheckOutPage = () => {
+  const navigate = useNavigate();
+
   document.title = "Thanh toán - EBook";
 
   const {
@@ -95,11 +98,11 @@ const CheckOutPage = () => {
     const captcha = randomString();
     setCaptcha(captcha);
     localStorage.setItem("captcha", `EBOOK${captcha}`);
+    localStorage.setItem("total_price", total);
   }, []);
 
   const handleOrder = (values) => {
-    
-    const captchaPost = onlinePayment ? (`EBOOK${captcha}`) : "";
+    const captchaPost = onlinePayment ? `EBOOK${captcha}` : "";
 
     fetch("https://api-ebook.cyclic.app/api/orders", {
       method: "POST",
@@ -122,6 +125,9 @@ const CheckOutPage = () => {
         reset();
         setProducts([]);
         setTotal(0);
+        if (onlinePayment) {
+          navigate(`/check-payment`);
+        }
       });
 
     if (onlinePayment) {
@@ -252,7 +258,8 @@ const CheckOutPage = () => {
                         <br />
                         Số tài khoản: <strong>107872417388</strong>
                         <br />
-                        Chuyển khoản với nội dung: <strong>EBOOK{captcha}</strong>
+                        Chuyển khoản với nội dung:{" "}
+                        <strong>EBOOK{captcha}</strong>
                         <br />
                         (Lưu ý: Chuyển khoản đúng nội dung và thanh toán trước
                         khi ấn nút "<strong>Đặt hàng</strong>" để đơn hàng được

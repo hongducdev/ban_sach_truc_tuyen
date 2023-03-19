@@ -16,6 +16,7 @@ const Products = lazy(() => import("./pages/ProductsPage"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 const IntroductionPage = lazy(() => import("./pages/IntroductionPage"));
 const PolicyPage = lazy(() => import("./pages/PolicyPage"));
+const CheckPaymentPage = lazy(() => import("./pages/CheckPaymentPage"));
 
 const AdminLoginPage = lazy(() => import("./pages/adminPages/AdminLoginPage"));
 const AdminHomePage = lazy(() => import("./pages/adminPages/AdminHomePage"));
@@ -88,6 +89,7 @@ const App = () => {
             ></Route>
             <Route path="/gioi-thieu" element={<IntroductionPage />}></Route>
             <Route path="/chinh-sach" element={<PolicyPage />}></Route>
+            <Route path="/check-payment" element={<CheckPaymentPage />}></Route>
             <Route path="*" element={<PageNotFound />}></Route>
           </Route>
         </Routes>
