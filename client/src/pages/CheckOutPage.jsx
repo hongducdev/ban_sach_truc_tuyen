@@ -9,10 +9,7 @@ import { convertCurr } from "../../utils/convertCurr";
 import { Loading } from "../components";
 import { Dropdown } from "../components/dropdown";
 
-const categoriesData = [
-  "Thanh toán khi nhận hàng",
-  "Thanh toán trực tuyến qua VNPAY",
-];
+const categoriesData = ["Thanh toán khi nhận hàng", "Thanh toán trực tuyến"];
 
 const schema = yup.object({
   name: yup.string().required("Vui lòng nhập họ và tên"),
@@ -22,7 +19,6 @@ const schema = yup.object({
 });
 
 const CheckOutPage = () => {
-
   document.title = "Thanh toán - EBook";
 
   const {
@@ -41,6 +37,7 @@ const CheckOutPage = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [onlinePayment, setOnlinePayment] = useState(false);
+  const [captcha, setCaptcha] = useState("");
 
   const getDropdownLabel = (name, defaultValue = "") => {
     const value = watch(name) || defaultValue;
@@ -49,7 +46,7 @@ const CheckOutPage = () => {
 
   const handleSelectDropdownOption = (name, value) => {
     setValue(name, value);
-    if (value === "Thanh toán trực tuyến qua VNPAY") {
+    if (value === "Thanh toán trực tuyến") {
       setOnlinePayment(true);
     }
   };
@@ -94,8 +91,15 @@ const CheckOutPage = () => {
     return result;
   };
 
+  useEffect(() => {
+    const captcha = randomString();
+    setCaptcha(captcha);
+    localStorage.setItem("captcha", `EBOOK${captcha}`);
+  }, []);
+
   const handleOrder = (values) => {
-    const captcha = onlinePayment ? randomString() : "";
+    
+    const captchaPost = onlinePayment ? (`EBOOK${captcha}`) : "";
 
     fetch("https://api-ebook.cyclic.app/api/orders", {
       method: "POST",
@@ -106,7 +110,7 @@ const CheckOutPage = () => {
       withCredentials: true,
       body: JSON.stringify({
         ...values,
-        captcha,
+        captcha: captchaPost,
       }),
     })
       .then((res) => res.json())
@@ -128,7 +132,7 @@ const CheckOutPage = () => {
         },
         body: JSON.stringify({
           total_price: total,
-          captcha: `EBOOK${captcha}`,
+          captcha: captchaPost,
         }),
         credentials: "include",
         withCredentials: true,
@@ -248,8 +252,7 @@ const CheckOutPage = () => {
                         <br />
                         Số tài khoản: <strong>107872417388</strong>
                         <br />
-                        Chuyển khoản với nội dung:{" "}
-                        <strong>EBOOK{randomString()}</strong>
+                        Chuyển khoản với nội dung: <strong>EBOOK{captcha}</strong>
                         <br />
                         (Lưu ý: Chuyển khoản đúng nội dung và thanh toán trước
                         khi ấn nút "<strong>Đặt hàng</strong>" để đơn hàng được
