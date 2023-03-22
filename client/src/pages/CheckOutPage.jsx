@@ -98,10 +98,8 @@ const CheckOutPage = () => {
     const captcha = randomString();
     setCaptcha(captcha);
     localStorage.setItem("captcha", `EBOOK${captcha}`);
-    if(total > 0) {
-      localStorage.setItem("total_price", total);
-    }
-  }, []);
+    localStorage.setItem("total_price", JSON.stringify(total));
+  }, [total]);
 
   const handleOrder = (values) => {
     const captchaPost = onlinePayment ? `EBOOK${captcha}` : "";
@@ -126,7 +124,6 @@ const CheckOutPage = () => {
         });
         reset();
         setProducts([]);
-        setTotal(0);
         if (onlinePayment) {
           navigate(`/check-payment`);
         }

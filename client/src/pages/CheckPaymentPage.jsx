@@ -8,7 +8,7 @@ const CheckPaymentPage = () => {
 
   React.useEffect(() => {
     setCaptcha(localStorage.getItem("captcha"));
-    setTotal(localStorage.getItem("total"));
+    setTotal(localStorage.getItem("total_price"));
   }, []);
 
   const handleConfirmPayment = () => {
@@ -22,19 +22,21 @@ const CheckPaymentPage = () => {
       }),
       credentials: "include",
       withCredentials: true,
-    }).then((res) => {
-      if (res.status === 200) {
-        if (res.json().message === "Đã thanh toán thành công!") {
-          toast.success("Đã thanh toán thành công!");
-          localStorage.removeItem("captcha");
-          localStorage.removeItem("total");
-        } else {
-          toast.error("Đang chờ xác thực thanh toán!");
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.json().message === "Đã thanh toán thành công!") {
+            toast.success("Đã thanh toán thành công!");
+            localStorage.removeItem("captcha");
+            localStorage.removeItem("total");
+          } else {
+            toast.error("Đang chờ xác thực thanh toán!");
+          }
         }
-      }
-    }).catch((err) => {
-      toast.error("Đã có lỗi xảy ra, vui lòng thử lại!");
-    });
+      })
+      .catch((err) => {
+        toast.error("Đã có lỗi xảy ra, vui lòng thử lại!");
+      });
   };
 
   return (
