@@ -98,7 +98,9 @@ const CheckOutPage = () => {
     const captcha = randomString();
     setCaptcha(captcha);
     localStorage.setItem("captcha", `EBOOK${captcha}`);
-    localStorage.setItem("total_price", total);
+    if(total > 0) {
+      localStorage.setItem("total_price", total);
+    }
   }, []);
 
   const handleOrder = (values) => {

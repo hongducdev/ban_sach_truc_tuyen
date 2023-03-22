@@ -20,6 +20,8 @@ const CheckPaymentPage = () => {
       body: JSON.stringify({
         captcha: captcha,
       }),
+      credentials: "include",
+      withCredentials: true,
     }).then((res) => {
       if (res.status === 200) {
         if (res.json().message === "Đã thanh toán thành công!") {
