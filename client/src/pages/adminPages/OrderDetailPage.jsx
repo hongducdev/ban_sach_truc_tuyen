@@ -10,6 +10,7 @@ const status = {
   shipping: "Đang giao hàng",
   completed: "Đã hoàn thành",
   canceled: "Đã hủy",
+  paid: "Đã thanh toán",
 };
 
 const OrderDetailPage = () => {
