@@ -12,7 +12,7 @@ const CheckPaymentPage = () => {
   }, []);
 
   const handleConfirmPayment = () => {
-    fetch("https://api-ebook.cyclic.app/ai/webhook/check-transfer", {
+    fetch("https://api-ebook.cyclic.app/api/webhook/check-transfer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,6 +32,8 @@ const CheckPaymentPage = () => {
           toast.error("Đang chờ xác thực thanh toán!");
         }
       }
+    }).catch((err) => {
+      toast.error("Đã có lỗi xảy ra, vui lòng thử lại!");
     });
   };
 
