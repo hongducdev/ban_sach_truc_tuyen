@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { convertCurr } from "../../utils/convertCurr";
 
 const CheckPaymentPage = () => {
+  const navigate = useNavigate();
   const [captcha, setCaptcha] = React.useState("");
   const [total, setTotal] = React.useState(0);
 
@@ -25,13 +27,12 @@ const CheckPaymentPage = () => {
     })
       .then((res) => {
         if (res.status === 200) {
-          if (res.json().message === "Đã thanh toán thành công!") {
-            toast.success("Đã thanh toán thành công!");
-            localStorage.removeItem("captcha");
-            localStorage.removeItem("total");
-          } else {
-            toast.error("Đang chờ xác thực thanh toán!");
-          }
+          toast.success("Đã thanh toán thành công!");
+          localStorage.removeItem("captcha");
+          localStorage.removeItem("total_price");
+          navigate("/");
+        } else if (res.status === 204) {
+          toast.error("Đang chờ xác thực, vui lòng đợi trong giây lát!");
         }
       })
       .catch((err) => {
@@ -59,8 +60,7 @@ const CheckPaymentPage = () => {
               Ngân hàng: <strong>VietinBank</strong>
             </p>
             <p className="text-lg">
-              Số tiền: <strong>{
-                convertCurr(total)}</strong>
+              Số tiền: <strong>{convertCurr(total)}</strong>
             </p>
             <p className="text-lg">
               Nội dung chuyển khoản: <strong>{captcha}</strong>

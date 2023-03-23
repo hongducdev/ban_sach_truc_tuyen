@@ -90,7 +90,6 @@ const App = () => {
             <Route path="/gioi-thieu" element={<IntroductionPage />}></Route>
             <Route path="/chinh-sach" element={<PolicyPage />}></Route>
             <Route path="/check-payment" element={<CheckPaymentPage />}></Route>
-            <Route path="*" element={<PageNotFound />}></Route>
           </Route>
         </Routes>
       </Suspense>
