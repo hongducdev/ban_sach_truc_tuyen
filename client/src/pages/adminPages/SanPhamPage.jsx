@@ -76,6 +76,12 @@ const SanPhamPage = () => {
                     <th className="text-left border-strock border p-3">
                       Tên sản phẩm
                     </th>
+                    <th className="text-left border-strock border p-3">
+                      Hình ảnh
+                    </th>
+                    <th className="text-left border-strock border p-3">
+                      Số lượng
+                    </th>
                     <th className="text-left border-strock border p-3">Giá</th>
                     <th className="text-left border-strock border p-3">
                       Danh mục
@@ -93,8 +99,14 @@ const SanPhamPage = () => {
                           <td className="text-center border-strock border p-3">
                             {index + 1}
                           </td>
-                          <td className="text-left border-strock border p-3">
+                          <td className="text-left border-strock border p-3 max-w-[600px]">
                             {product.name}
+                          </td>
+                          <td className="text-left border-strock border p-3">
+                            <img src={product.images[0]} alt={product.name} className="w-20" />
+                          </td>
+                          <td className="text-left border-strock border p-3">
+                            {product.stock}
                           </td>
                           <td className="text-left border-strock border p-3">
                             {new Intl.NumberFormat("vi-VN", {
@@ -105,7 +117,7 @@ const SanPhamPage = () => {
                           <td className="text-left border-strock border p-3">
                             {product.category}
                           </td>
-                          <td className="text-left border-strock border p-3 flex items-center gap-x-3">
+                          <td className="text-left p-3 flex items-center justify-center gap-x-3">
                             <Link to={`/admin/edit-product/${product._id}`}>
                               <button className="bg-blue-500 text-white p-2 rounded-xl">
                                 <svg

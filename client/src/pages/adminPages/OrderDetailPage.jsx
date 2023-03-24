@@ -172,6 +172,7 @@ const OrderDetailPage = () => {
                           <th className="p-3 border-strock border">
                             Tên sản phẩm
                           </th>
+                          <th className="p-3 border-strock border">Hình ảnh</th>
                           <th className="p-3 border-strock border">Số lượng</th>
                           <th className="p-3 border-strock border">Giá</th>
                           <th className="p-3 border-strock border">
@@ -184,6 +185,13 @@ const OrderDetailPage = () => {
                           <tr key={item._id}>
                             <td className="p-3 border-strock border">
                               {item?.product?.name}
+                            </td>
+                            <td className="p-3 border-strock border">
+                              <img
+                                src={item.product.images[0]}
+                                alt={item.product.name}
+                                className="w-20"
+                              />
                             </td>
                             <td className="p-3 border-strock border">
                               {item?.quantity}

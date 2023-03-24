@@ -13,7 +13,6 @@ const status = {
 };
 
 const DonHangPage = () => {
-
   document.title = "Quản lý đơn hàng - EBook";
 
   const [orders, setOrders] = useState([]);
@@ -36,12 +35,56 @@ const DonHangPage = () => {
       });
   }, []);
 
+  // lọc đơn hàng theo trạng thái
+  const filterOrder = (status) => {
+    setLoading(true);
+    const filteredOrders = orders.filter((order) => order.status === status);
+    setOrders(filteredOrders);
+    setLoading(false);
+  };
+
   return (
     <Fragment>
       <div className="bg-darkbg rounded-xl p-5">
         <h2 className="font-semibold text-3xl">Quản lý đơn hàng</h2>
         <div className="mt-10">
           <h3 className="font-semibold text-2xl">Danh sách đơn hàng</h3>
+
+          <div className="">
+            <div className="mt-10 flex items-center gap-x-4">
+              <button
+                className="border-primary border py-2 px-3 rounded-lg"
+                onClick={() => filterOrder("pending")}
+              >
+                Đơn hàng chưa xử lý
+              </button>
+              <button
+                className="border-primary border py-2 px-3 rounded-lg"
+                onClick={() => filterOrder("paid")}
+              >
+                Đơn hàng đã thanh toán
+              </button>
+              <button
+                className="border-primary border py-2 px-3 rounded-lg"
+                onClick={() => filterOrder("shipping")}
+              >
+                Đơn hàng đang giao hàng
+              </button>
+              <button
+                className="border-primary border py-2 px-3 rounded-lg"
+                onClick={() => filterOrder("completed")}
+              >
+                Đơn hàng đã hoàn thành
+              </button>
+              <button
+                className="border-primary border py-2 px-3 rounded-lg"
+                onClick={() => filterOrder("canceled")}
+              >
+                Đơn hàng đã hủy
+              </button>
+            </div>
+          </div>
+
           <div className="mt-10">
             {loading ? (
               <div className="">
