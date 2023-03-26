@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -94,7 +94,7 @@ const Contact = () => {
           <div className="my-10">
             <form
               className="flex flex-col gap-4"
-              onSubmit={handleSubmit(handleSubmitForm)}
+              onSubmit={handleSubmit(handelSubmitForm)}
               ref={form}
             >
               <div className="">
