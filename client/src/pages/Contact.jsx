@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Textarea } from "../components";
+import emailjs from "@emailjs/browser";
 
 const schema = yup.object({
   name: yup.string().required("Vui lòng nhập tên của bạn"),
@@ -37,9 +38,22 @@ const Contact = () => {
     }
   }, [errors]);
 
-  const handleSubmitForm = (data) => {
-    console.log(data);
-    toast.success("Gửi thành công");
+  const form = useRef();
+
+  const handelSubmitForm = (values) => {
+    emailjs
+      .sendForm(
+        "service_g62hbgo",
+        "template_qmvqx7j",
+        form.current,
+        "IbPRxAUIJC8ys8Ekm"
+      )
+      .then((res) => {
+        toast.success("Gửi phản hồi thành công!");
+      })
+      .catch((err) => {
+        toast.error("Gửi phản hồi thất bại!");
+      });
   };
 
   return (
@@ -78,7 +92,11 @@ const Contact = () => {
             Gửi thắc mắc tới chúng tôi
           </h1>
           <div className="my-10">
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit(handleSubmitForm)}>
+            <form
+              className="flex flex-col gap-4"
+              onSubmit={handleSubmit(handleSubmitForm)}
+              ref={form}
+            >
               <div className="">
                 <Input
                   name="name"
