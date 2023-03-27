@@ -17,6 +17,7 @@ const DoanhThuPage = () => {
   document.title = "Quản lý doanh thu - EBook";
 
   const [doanhThu, setDoanhThu] = useState([]);
+  const [productSold, setProductSold] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -35,6 +36,25 @@ const DoanhThuPage = () => {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("https://api-ebook.cyclic.app/api/orders/statistics", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      withCredentials: true,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProductSold(data.result);
+        setLoading(false);
+      });
+  }, []);
+
+  console.log(productSold);
 
   return (
     <Fragment>
@@ -76,7 +96,9 @@ const DoanhThuPage = () => {
               </div>
 
               <div className="mt-10">
-                <h3 className="font-semibold text-2xl">Danh sách đơn hàng</h3>
+                <h3 className="font-semibold text-2xl">
+                  Danh sách sách đã bán được
+                </h3>
                 <div className="mt-10">
                   <table className="w-full border-strock border">
                     <thead className="border-strock border">
@@ -119,6 +141,61 @@ const DoanhThuPage = () => {
                                 Chi tiết
                               </button>
                             </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="mt-10">
+                <h3 className="font-semibold text-2xl">
+                  Danh sách sách đã bán được
+                </h3>
+                <div className="mt-10">
+                  <table className="w-full border-strock border">
+                    <thead className="border-strock border">
+                      <tr className="border-strock border">
+                        <th className="text-left border-strock border p-3">
+                          STT
+                        </th>
+                        <th className="text-left border-strock border p-3">
+                          Tên sách
+                        </th>
+                        <th className="text-left border-strock border p-3">
+                          Hình ảnh
+                        </th>
+                        <th className="text-left border-strock border p-3">
+                          Số lượng đã bán
+                        </th>
+                        <th className="text-left border-strock border p-3">
+                          Tổng tiền
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="border-strock border">
+                      {productSold?.map((product, index) => (
+                        <tr className="border-strock border" key={index}>
+                          <td className="border-strock border p-3">
+                            {index + 1}
+                          </td>
+                          <td className="border-strock border p-3">
+                            {product?.product?.name}
+                          </td>
+                          <td className="border-strock border p-3">
+                            <img
+                              src={product.product.images[0]}
+                              alt={product.product.name}
+                              className="w-20"
+                            />
+                          </td>
+                          <td className="border-strock border p-3">
+                            {
+                              product.quantity
+                            }
+                          </td>
+                          <td className="border-strock border p-3">
+                            {convertCurr(product.quantity * product.product.price)}
                           </td>
                         </tr>
                       ))}
