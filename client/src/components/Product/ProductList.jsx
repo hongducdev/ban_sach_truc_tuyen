@@ -26,7 +26,9 @@ const ProductList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        // nếu sản phẩm nào có số lượng nhỏ hơn 1 thì xóa khỏi mảng
+        const newProducts = data.filter((product) => product.stock > 0);
+        setProducts(newProducts);
         setLoading(false);
       });
   }, []);

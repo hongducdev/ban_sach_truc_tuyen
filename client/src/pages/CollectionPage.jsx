@@ -17,7 +17,9 @@ const CollectionPage = () => {
         `https://api-ebook.cyclic.app/api/products/category?q=${collectionID}`
       )
       .then((res) => {
-        setProducts(res.data);
+        // nếu sản phẩm nào có số lượng nhỏ hơn 1 thì xóa khỏi mảng
+        const newProducts = res.data.filter((product) => product.stock > 0);
+        setProducts(newProducts);
         setLoading(false);
       })
       .catch((err) => {
