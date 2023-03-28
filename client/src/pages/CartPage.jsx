@@ -77,12 +77,13 @@ const CartPage = () => {
           const newCart = cart.map((item) =>
             item._id === id ? { ...item, quantity: item.quantity + 1 } : item
           );
-          setQuantity(quantity + 1);
-          setCart(newCart);
-          window.location.reload();
-          if(quantity >= item.product.quantity){
+          if(quantity > item.product.quantity){
             toast.error("Số lượng sản phẩm không đủ")
             setQuantity(item.product.quantity)
+          } else {
+            setQuantity(quantity + 1);
+            setCart(newCart);
+            window.location.reload();
           }
         } else {
           console.log(res);
@@ -108,12 +109,13 @@ const CartPage = () => {
           const newCart = cart.map((item) =>
             item._id === id ? { ...item, quantity: item.quantity - 1 } : item
           );
-          setQuantity(quantity - 1);
-          setCart(newCart);
-          window.location.reload();
           if(quantity <= 1){
             toast.error("Số lượng sản phẩm không đủ")
             setQuantity(1)
+          } else {
+            setQuantity(quantity - 1);
+            setCart(newCart);
+            window.location.reload();
           }
         } else {
           console.log(res);
