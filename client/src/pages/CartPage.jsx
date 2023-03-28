@@ -7,7 +7,6 @@ import { convertCurr } from "../../utils/convertCurr";
 import { toast } from "react-toastify";
 
 const CartPage = () => {
-
   document.title = "Giỏ hàng - EBook";
 
   const [cart, setCart] = useState([]);
@@ -62,7 +61,7 @@ const CartPage = () => {
         });
   };
 
-  const handlePlusProduct = (id, quantity) => {
+  const handlePlusProduct = (id, quantity, stock) => {
     fetch(`https://api-ebook.cyclic.app/api/carts/`, {
       method: "PUT",
       body: JSON.stringify({ productId: id, quantity: quantity + 1 }),
@@ -74,12 +73,13 @@ const CartPage = () => {
     })
       .then((res) => {
         if (res.status === 200) {
+          // kiểm tra giới hạn số lượng sản phẩm
           const newCart = cart.map((item) =>
             item._id === id ? { ...item, quantity: item.quantity + 1 } : item
           );
-          if(quantity > item.product.quantity){
-            toast.error("Số lượng sản phẩm không đủ")
-            setQuantity(item.product.quantity)
+          if (quantity > stock) {
+            toast.error("Số lượng sản phẩm không đủ");
+            setQuantity(stock);
           } else {
             setQuantity(quantity + 1);
             setCart(newCart);
@@ -109,9 +109,9 @@ const CartPage = () => {
           const newCart = cart.map((item) =>
             item._id === id ? { ...item, quantity: item.quantity - 1 } : item
           );
-          if(quantity <= 1){
-            toast.error("Số lượng sản phẩm không đủ")
-            setQuantity(1)
+          if (quantity <= 1) {
+            toast.error("Số lượng sản phẩm không đủ");
+            setQuantity(1);
           } else {
             setQuantity(quantity - 1);
             setCart(newCart);
@@ -159,7 +159,11 @@ const CartPage = () => {
                     <button
                       className="w-9 h-7 bg-strock rounded-md"
                       onClick={() =>
-                        handlePlusProduct(item.product._id, item.quantity)
+                        handlePlusProduct(
+                          item.product._id,
+                          item.quantity,
+                          item.product.stock
+                        )
                       }
                     >
                       +
