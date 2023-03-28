@@ -82,6 +82,7 @@ const CartPage = () => {
           window.location.reload();
           if(quantity >= item.product.quantity){
             toast.error("Số lượng sản phẩm không đủ")
+            setQuantity(item.product.quantity)
           }
         } else {
           console.log(res);
