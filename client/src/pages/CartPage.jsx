@@ -62,36 +62,41 @@ const CartPage = () => {
   };
 
   const handlePlusProduct = (id, quantity, stock) => {
-    fetch(`https://api-ebook.cyclic.app/api/carts/`, {
-      method: "PUT",
-      body: JSON.stringify({ productId: id, quantity: quantity + 1 }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      withCredentials: true,
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          // kiểm tra giới hạn số lượng sản phẩm
-          const newCart = cart.map((item) =>
-            item._id === id ? { ...item, quantity: item.quantity + 1 } : item
-          );
-          if (quantity > stock) {
-            toast.error("Số lượng sản phẩm không đủ");
-            setQuantity(stock);
-          } else {
-            setQuantity(quantity + 1);
-            setCart(newCart);
-            window.location.reload();
-          }
-        } else {
-          console.log(res);
-        }
+    console.log(quantity, stock);
+    if(quantity >= stock) {
+      toast.error("Số lượng sản phẩm không đủ");
+      return;
+    } else {
+      fetch(`https://api-ebook.cyclic.app/api/carts/`, {
+        method: "PUT",
+        body: JSON.stringify({ productId: id, quantity: quantity + 1 }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        withCredentials: true,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (res.status === 200) {
+            const newCart = cart.map((item) =>
+              item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+            );
+            if (quantity >= stock) {
+              toast.error("Số lượng sản phẩm không đủ");
+              setQuantity(stock);
+            } else {
+              setQuantity(quantity + 1);
+              setCart(newCart);
+              window.location.reload();
+            }
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const handleMinusProduct = (id, quantity) => {
