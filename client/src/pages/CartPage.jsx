@@ -176,7 +176,7 @@ const CartPage = () => {
                     <input
                       type="text"
                       className="w-10 h-7 text-center border border-text3 rounded-md"
-                      value={item.quantity > 0 ? item.quantity : setQuantity(1)}
+                      value={item.quantity > item.product.stock ? item.product.stock : item.quantity}
                     />
                     <button
                       className="w-9 h-7 bg-strock rounded-md"
@@ -252,13 +252,6 @@ const CartPage = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="text-center my-10">
-          <Category title="Sản phẩm có thể bạn thích" />
-          <div className="mt-10"></div>
-          <ProductList />
-          <div className="mt-10"></div>
-          <button className="button uppercase">Xem thêm sản phẩm</button>
         </div>
       </div>
     </Fragment>
