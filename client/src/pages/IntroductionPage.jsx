@@ -24,15 +24,15 @@ const members = [
     name: "Vi Hoàng Hợp",
     avatar:
       "https://cdn.discordapp.com/attachments/1074219605414903948/1084131196805599404/20230214_225912_IMG_5390.jpg",
-    mssv: "DTC20H4801030067",
-    email: "",
+    mssv: "DTC2054801030149",
+    email: "Hhopictu@gmail.com",
   },
   {
     name: "Nguyễn Văn Đức",
     avatar:
       "https://cdn.discordapp.com/attachments/1074219605414903948/1086468359257858168/received_2371803272978434.jpg",
-    mssv: "DTC20H4801030067",
-    email: "",
+    mssv: "DTC20H4801030055",
+    email: "ductn0701@gmail.com",
   },
 ];
 
