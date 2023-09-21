@@ -16,6 +16,13 @@ const schema = yup.object({
   description: yup.string().required("Mô tả không được để trống"),
   category: yup.string().required("Danh mục không được để trống"),
   image1: yup.string().required("Ảnh không được để trống"),
+  image2: yup.string().required("Ảnh không được để trống"),
+  image3: yup.string().required("Ảnh không được để trống"),
+  image4: yup.string().required("Ảnh không được để trống"),
+  image5: yup.string().required("Ảnh không được để trống"),
+  image6: yup.string().required("Ảnh không được để trống"),
+  image7: yup.string().required("Ảnh không được để trống"),
+  image8: yup.string().required("Ảnh không được để trống"),
   stock: yup.number().required("Số lượng không được để trống"),
 });
 
@@ -171,6 +178,76 @@ const EditProduct = () => {
             <Input
               type="text"
               name="image1"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 2</Label>
+            <Input
+              type="text"
+              name="image2"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 3</Label>
+            <Input
+              type="text"
+              name="image3"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 4</Label>
+            <Input
+              type="text"
+              name="image4"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 5</Label>
+            <Input
+              type="text"
+              name="image5"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 6</Label>
+            <Input
+              type="text"
+              name="image6"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 7</Label>
+            <Input
+              type="text"
+              name="image7"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <Label htmlFor="images">Ảnh 8</Label>
+            <Input
+              type="text"
+              name="image8"
               control={control}
               placeholder="Nhập ảnh"
               className="bg-transparent text-white"
