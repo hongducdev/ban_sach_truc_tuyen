@@ -41,6 +41,20 @@ const Contact = () => {
   const form = useRef();
 
   const handelSubmitForm = (values) => {
+
+    const phone = values.phone;
+    const email = values.email;
+    const phoneNumberPattern = /^[0-9]{10}$/; 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!phone.match(phoneNumberPattern)) {
+      toast.error("Số điện thoại không hợp lệ!");
+      return;
+    }
+    if (!email.match(emailPattern)) {
+      toast.error("Email không hợp lệ!");
+      return;
+    }
+
     emailjs
       .sendForm(
         "service_g62hbgo",
