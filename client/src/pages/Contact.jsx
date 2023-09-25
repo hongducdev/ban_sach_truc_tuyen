@@ -11,47 +11,40 @@ const schema = yup.object({
   email: yup.string().required("Vui lòng nhập email của bạn"),
   phone: yup.string().required("Vui lòng nhập số điện thoại của bạn"),
   content: yup.string().required("Vui lòng nhập nội dung"),
-})
+});
 
 const Contact = () => {
-
   document.title = "Liên hệ - EBook";
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm(
-    {
-      resolver: yupResolver(schema),
-      mode: "onSubmit",
-    }
-  );
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+  });
 
   useEffect(() => {
     const arrErroes = Object.values(errors);
     if (arrErroes.length > 0) {
-      toast.error(arrErroes[0]?.message, {
-        pauseOnHover: false,
-        delay: 0,
-      });
+      alert(arrErroes[0].message);
     }
   }, [errors]);
 
   const form = useRef();
 
   const handelSubmitForm = (values) => {
-
     const phone = values.phone;
     const email = values.email;
-    const phoneNumberPattern = /^[0-9]{10}$/; 
+    const phoneNumberPattern = /^[0-9]{10}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!phone.match(phoneNumberPattern)) {
-      toast.error("Số điện thoại không hợp lệ!");
+      alert("Số điện thoại không hợp lệ!");
       return;
     }
     if (!email.match(emailPattern)) {
-      toast.error("Email không hợp lệ!");
+      alert("Email không hợp lệ!");
       return;
     }
 
@@ -63,10 +56,10 @@ const Contact = () => {
         "IbPRxAUIJC8ys8Ekm"
       )
       .then((res) => {
-        toast.success("Gửi phản hồi thành công!");
+        alert("Gửi phản hồi thành công!");
       })
       .catch((err) => {
-        toast.error("Gửi phản hồi thất bại!");
+        alert("Gửi phản hồi thất bại!");
       });
   };
 
