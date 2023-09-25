@@ -14,7 +14,7 @@ import { Input, Textarea } from "../components";
 const schema = yup.object({
   name: yup.string().required("Vui lòng nhập tên của bạn"),
   email: yup.string().required("Vui lòng nhập email của bạn"),
-  phone: yup.string().required("Vui lòng nhập số điện thoại của bạn"),
+  image: yup.string().required("Vui lòng nhập hình ảnh của bạn"),
   content: yup.string().required("Vui lòng nhập nội dung"),
 });
 
@@ -89,16 +89,15 @@ const ProductPage = () => {
   useEffect(() => {
     const arrErroes = Object.values(errors);
     if (arrErroes.length > 0) {
-      toast.error(arrErroes[0]?.message, {
-        pauseOnHover: false,
-        delay: 0,
-      });
+      alert(arrErroes[0].message);
     }
   }, [errors]);
 
   const form = useRef();
 
-  const handelSubmitForm = (values) => {};
+  const handelSubmitForm = (values) => {
+    alert("Đánh giá thành công");
+  };
 
   return (
     <Fragment>
@@ -253,7 +252,7 @@ const ProductPage = () => {
               </div>
               <div className="flex gap-4">
                 <Input
-                  name="file"
+                  name="image"
                   type="file"
                   placeholder="Email của bạn"
                   control={control}
