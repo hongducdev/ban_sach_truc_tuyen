@@ -142,7 +142,7 @@ const AddProduct = () => {
             <Label htmlFor="category">Danh mục</Label>
             <select
               name="category"
-              value={getDropdownLabel("category", product.category)}
+              value={getDropdownLabel("category", categoriesData[0])}
               onChange={(e) =>
                 handleSelectDropdownOption("category", e.target.value)
               }
