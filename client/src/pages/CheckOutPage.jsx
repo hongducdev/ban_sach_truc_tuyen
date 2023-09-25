@@ -213,7 +213,7 @@ const CheckOutPage = () => {
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="payment">Phương thức thanh toán</Label>
-                  <select>
+                  <select className="bg-transparent border rounded-lg outline-none focus:border-primary border-slate-700 p-4">
                     {categoriesData.map((item) => (
                       <option key={item} value={item}>
                         {item}

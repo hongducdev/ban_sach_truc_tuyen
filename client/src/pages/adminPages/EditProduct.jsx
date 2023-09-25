@@ -148,9 +148,14 @@ const EditProduct = () => {
               onChange={(e) =>
                 handleSelectDropdownOption("category", e.target.value)
               }
+              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
             >
               {categoriesData.map((category) => (
-                <option key={category} value={category}>
+                <option
+                  key={category}
+                  value={category}
+                  className="p-4 bg-darkSecondary"
+                >
                   {category}
                 </option>
               ))}
