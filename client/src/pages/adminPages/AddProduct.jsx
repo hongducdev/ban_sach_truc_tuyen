@@ -5,7 +5,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { Dropdown } from "../../components/dropdown";
 
 const schema = yup.object({
   name: yup.string().required("Tên sản phẩm không được để trống"),
@@ -48,10 +47,7 @@ const AddProduct = () => {
   useEffect(() => {
     const arrErroes = Object.values(errors);
     if (arrErroes.length > 0) {
-      toast.error(arrErroes[0]?.message, {
-        pauseOnHover: false,
-        delay: 0,
-      });
+      alert(arrErroes[0].message);
     }
   }, [errors]);
 
@@ -75,17 +71,10 @@ const AddProduct = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          toast.success("Thêm sản phẩm thành công", {
-            pauseOnHover: false,
-            delay: 0,
-          });
-          // reset form
+          alert("Thêm sản phẩm thành công");
           reset();
         } else {
-          toast.error("Thêm sản phẩm thất bại", {
-            pauseOnHover: false,
-            delay: 0,
-          });
+          alert("Thêm sản phẩm thất bại");
         }
       })
       .catch((err) => {
@@ -151,23 +140,19 @@ const AddProduct = () => {
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="category">Danh mục</Label>
-            <Dropdown>
-              <Dropdown.Select
-                placeholder={getDropdownLabel("category", "Chọn danh mục")}
-              ></Dropdown.Select>
-              <Dropdown.List classNames="bg-darkSecondary">
-                {categoriesData.map((category) => (
-                  <Dropdown.Option
-                    key={category}
-                    onClick={() =>
-                      handleSelectDropdownOption("category", category)
-                    }
-                  >
-                    <span className="capitalize">{category}</span>
-                  </Dropdown.Option>
-                ))}
-              </Dropdown.List>
-            </Dropdown>
+            <select
+              name="category"
+              value={getDropdownLabel("category", product.category)}
+              onChange={(e) =>
+                handleSelectDropdownOption("category", e.target.value)
+              }
+            >
+              {categoriesData.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="images">Ảnh 1</Label>

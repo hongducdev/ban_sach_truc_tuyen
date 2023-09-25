@@ -52,10 +52,7 @@ const EditProduct = () => {
   useEffect(() => {
     const arrErroes = Object.values(errors);
     if (arrErroes.length > 0) {
-      toast.error(arrErroes[0]?.message, {
-        pauseOnHover: false,
-        delay: 0,
-      });
+      alert(arrErroes[0].message);
     }
   }, [errors]);
 
@@ -68,7 +65,7 @@ const EditProduct = () => {
             setProduct(res.data);
           });
       } catch (error) {
-        console.log(error);
+        alert("Lỗi load sản phẩm");
       }
     };
     getProduct();
@@ -76,16 +73,13 @@ const EditProduct = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.put(
+      await axios.patch(
         `https://api-ebook.cyclic.app/api/products/${productId}`,
         data
       );
-      toast.success("Sửa sản phẩm thành công", {
-        pauseOnHover: false,
-        delay: 0,
-      });
+      alert("Cập nhật thành công");
     } catch (error) {
-      console.log(error);
+      alert("Cập nhật thất bại");
     }
   };
 
@@ -96,7 +90,8 @@ const EditProduct = () => {
         <p className="">{product.name}</p>
         <form
           className="mt-10 flex flex-col gap-3"
-          onSubmit={handleSubmit(onSubmit)}>
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="flex flex-col gap-3">
             <Label htmlFor="name">Tên sản phẩm</Label>
             <Input
@@ -147,24 +142,19 @@ const EditProduct = () => {
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="category">Danh mục</Label>
-            <Dropdown>
-              <Dropdown.Select
-                placeholder={getDropdownLabel(
-                  "category",
-                  "Select category"
-                )}></Dropdown.Select>
-              <Dropdown.List>
-                {categoriesData.map((category) => (
-                  <Dropdown.Option
-                    key={category}
-                    onClick={() =>
-                      handleSelectDropdownOption("category", category)
-                    }>
-                    <span className="capitalize">{category}</span>
-                  </Dropdown.Option>
-                ))}
-              </Dropdown.List>
-            </Dropdown>
+            <select
+              name="category"
+              value={getDropdownLabel("category", product.category)}
+              onChange={(e) =>
+                handleSelectDropdownOption("category", e.target.value)
+              }
+            >
+              {categoriesData.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="images">Ảnh 1</Label>
@@ -189,7 +179,8 @@ const EditProduct = () => {
           <div className="my-5 flex justify-end">
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-              type="submit">
+              type="submit"
+            >
               Cập nhật
             </button>
           </div>

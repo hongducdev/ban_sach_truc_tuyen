@@ -57,10 +57,7 @@ const CheckOutPage = () => {
   useEffect(() => {
     const arrErroes = Object.values(errors);
     if (arrErroes.length > 0) {
-      toast.error(arrErroes[0]?.message, {
-        pauseOnHover: false,
-        delay: 0,
-      });
+      alert(arrErroes[0].message);
     }
   }, [errors]);
 
@@ -118,10 +115,7 @@ const CheckOutPage = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success("Đặt hàng thành công", {
-          pauseOnHover: false,
-          delay: 0,
-        });
+        alert("Đặt hàng thành công");
         reset();
         setProducts([]);
         if (onlinePayment) {
@@ -143,9 +137,9 @@ const CheckOutPage = () => {
         withCredentials: true,
       }).then((res) => {
         if (res.status === 200) {
-          toast.success("Đăng ký webhook thành công");
+          alert("Đăng ký webhook thành công");
         } else {
-          toast.error("Đăng ký webhook thất bại");
+          alert("Đăng ký webhook thất bại");
         }
       });
     }
@@ -219,26 +213,13 @@ const CheckOutPage = () => {
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="payment">Phương thức thanh toán</Label>
-                  <Dropdown>
-                    <Dropdown.Select
-                      placeholder={getDropdownLabel(
-                        "category",
-                        "Lựa chọn phương thức thanh toán"
-                      )}
-                    ></Dropdown.Select>
-                    <Dropdown.List classNames="bg-whiteSoft">
-                      {categoriesData.map((category) => (
-                        <Dropdown.Option
-                          key={category}
-                          onClick={() =>
-                            handleSelectDropdownOption("category", category)
-                          }
-                        >
-                          <span className="capitalize">{category}</span>
-                        </Dropdown.Option>
-                      ))}
-                    </Dropdown.List>
-                  </Dropdown>
+                  <select>
+                    {categoriesData.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 {onlinePayment && (
                   <>
