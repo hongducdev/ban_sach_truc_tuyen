@@ -114,7 +114,7 @@ const Contact = () => {
               <div className="flex gap-4">
                 <Input
                   name="email"
-                  type="email"
+                  type="text"
                   placeholder="Email của bạn"
                   control={control}
                 />
