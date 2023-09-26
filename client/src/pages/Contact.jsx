@@ -39,12 +39,14 @@ const Contact = () => {
     const email = values.email;
     const phoneNumberPattern = /^[0-9]{10}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!phone.match(phoneNumberPattern)) {
-      alert("Số điện thoại không hợp lệ!");
-      return;
-    }
+    
     if (!email.match(emailPattern)) {
       alert("Email không hợp lệ!");
+      return;
+    }
+
+    if (!phone.match(phoneNumberPattern)) {
+      alert("Số điện thoại không hợp lệ!");
       return;
     }
 
