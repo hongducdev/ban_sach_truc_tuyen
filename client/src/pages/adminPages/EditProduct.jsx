@@ -3,7 +3,7 @@ import { Label } from "../../components";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const categoriesData = ["architecture", "education"];
+const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
 
 const EditProduct = () => {
   document.title = "Sửa sản phẩm - EBook";
