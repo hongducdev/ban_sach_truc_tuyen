@@ -8,8 +8,11 @@ import emailjs from "@emailjs/browser";
 
 const schema = yup.object({
   name: yup.string().required("Vui lòng nhập tên của bạn"),
-  email: yup.string().required("Vui lòng nhập email của bạn"),
-  phone: yup.string().required("Vui lòng nhập số điện thoại của bạn"),
+  email: yup.string().email('Email không hợp lệ').required("Vui lòng nhập email của bạn"),
+  phone: yup
+    .string()
+    .matches(/^0\d{1,9}$/, "Số điện thoại không hợp lệ")
+    .required("Vui lòng nhập số điện thoại của bạn"),
   content: yup.string().required("Vui lòng nhập nội dung"),
 });
 
