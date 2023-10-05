@@ -51,8 +51,6 @@ const CheckOutPage = () => {
     setValue(name, value);
     if (value === "Thanh toán trực tuyến") {
       setOnlinePayment(true);
-    } else {
-      setOnlinePayment(false);
     }
   };
 
@@ -101,8 +99,6 @@ const CheckOutPage = () => {
   }, [total]);
 
   const handleOrder = (values) => {
-    const captchaPost = onlinePayment ? `EBOOK${captcha}` : "";
-
     const phone = values.phone;
     const email = values.email;
     const phoneNumberPattern = /^[0-9]{10}$/;
@@ -118,9 +114,7 @@ const CheckOutPage = () => {
       return;
     }
 
-    // kiểm tra 
-
-    
+    const captchaPost = onlinePayment ? `EBOOK${captcha}` : "";
 
     fetch("https://api-ebook.cyclic.app/api/orders", {
       method: "POST",
@@ -234,12 +228,7 @@ const CheckOutPage = () => {
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="payment">Phương thức thanh toán</Label>
-                  <select
-                    className="bg-transparent border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-                    onChange={(e) =>
-                      handleSelectDropdownOption("payment", e.target.value)
-                    }
-                  >
+                  <select className="bg-transparent border rounded-lg outline-none focus:border-primary border-slate-700 p-4">
                     {categoriesData.map((item) => (
                       <option key={item} value={item}>
                         {item}
