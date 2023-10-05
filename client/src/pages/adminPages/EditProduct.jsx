@@ -89,14 +89,16 @@ const EditProduct = () => {
     }
 
 
-    try {
-      await axios.patch(
-        `https://api-ebook.cyclic.app/api/products/${productId}`,
-        product
-      );
-      alert("Cập nhật thành công");
-    } catch (error) {
-      alert("Cập nhật thất bại");
+    else {
+      try {
+        await axios.patch(
+          `https://api-ebook.cyclic.app/api/products/${productId}`,
+          product
+        );
+        alert("Cập nhật thành công");
+      } catch (error) {
+        alert("Cập nhật thất bại");
+      }
     }
   };
 
