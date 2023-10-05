@@ -17,7 +17,7 @@ const schema = yup.object({
   stock: yup.number().required("Số lượng không được để trống").min(0, "Số lượng không nhận giá trị âm"),
 });
 
-const categoriesData = ["Vui lòng lựa chọn danh mục sạch","Sách hướng nghiệp", "Sách triết học"];
+const categoriesData = ["","Sách hướng nghiệp", "Sách triết học"];
 
 const AddProduct = () => {
 
