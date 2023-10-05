@@ -47,7 +47,7 @@ const EditProduct = () => {
   };
 
   const onSubmit = async () => {
-    // validate dữ liệu đàu vào
+    // validate dữ liệu đầu vào
     if (!product.name) {
       alert("Tên sản phẩm không được để trống");
       return;
@@ -63,42 +63,40 @@ const EditProduct = () => {
     if (!product.price) {
       alert("Giá không được để trống");
       return;
-    } 
+    }
     if (product.price < 0) {
       alert("Giá tiền không nhận giá trị âm");
+      return;
     }
     if (!product.description) {
       alert("Mô tả không được để trống");
       return;
     }
-    if(!product.category) {
+    if (!product.category) {
       alert("Mô tả không được để trống");
       return;
     }
-    if(!product.images) {
-      alert("Hình arh không được để trống");
+    if (!product.images) {
+      alert("Hình ảnh không được để trống");
       return;
     }
-    if(!product.stock) {
-      alert("Số lượng không được để trống")
+    if (!product.stock) {
+      alert("Số lượng không được để trống");
       return;
-    } 
+    }
     if (product.stock < 0) {
       alert("Số lượng không nhận giá trị âm");
       return;
     }
 
-
-    else {
-      try {
-        await axios.patch(
-          `https://api-ebook.cyclic.app/api/products/${productId}`,
-          product
-        );
-        alert("Cập nhật thành công");
-      } catch (error) {
-        alert("Cập nhật thất bại");
-      }
+    try {
+      await axios.patch(
+        `https://api-ebook.cyclic.app/api/products/${productId}`,
+        product
+      );
+      alert("Cập nhật thành công");
+    } catch (error) {
+      alert("Cập nhật thất bại");
     }
   };
 
