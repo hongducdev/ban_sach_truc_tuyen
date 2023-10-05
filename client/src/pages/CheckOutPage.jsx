@@ -51,6 +51,8 @@ const CheckOutPage = () => {
     setValue(name, value);
     if (value === "Thanh toán trực tuyến") {
       setOnlinePayment(true);
+    } else {
+      setOnlinePayment(false);
     }
   };
 
@@ -115,6 +117,8 @@ const CheckOutPage = () => {
       alert("Email không hợp lệ!");
       return;
     }
+
+    // kiểm tra 
 
     
 
@@ -230,7 +234,12 @@ const CheckOutPage = () => {
                 </div>
                 <div className="my-3 flex flex-col gap-y-2">
                   <Label htmlFor="payment">Phương thức thanh toán</Label>
-                  <select className="bg-transparent border rounded-lg outline-none focus:border-primary border-slate-700 p-4">
+                  <select
+                    className="bg-transparent border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
+                    onChange={(e) =>
+                      handleSelectDropdownOption("payment", e.target.value)
+                    }
+                  >
                     {categoriesData.map((item) => (
                       <option key={item} value={item}>
                         {item}
