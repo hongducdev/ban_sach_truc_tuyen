@@ -47,6 +47,48 @@ const EditProduct = () => {
   };
 
   const onSubmit = async () => {
+    // validate dữ liệu đàu vào
+    if (!product.name) {
+      alert("Tên sản phẩm không được để trống");
+      return;
+    }
+    if (!product.author) {
+      alert("Tên tác giả không được để trống");
+      return;
+    }
+    if (!product.introduction) {
+      alert("Giới thiệu không được để trống");
+      return;
+    }
+    if (!product.price) {
+      alert("Giá không được để trống");
+      return;
+    } 
+    if (product.price < 0) {
+      alert("Giá tiền không nhận giá trị âm");
+    }
+    if (!product.description) {
+      alert("Mô tả không được để trống");
+      return;
+    }
+    if(!product.category) {
+      alert("Mô tả không được để trống");
+      return;
+    }
+    if(!product.images) {
+      alert("Hình arh không được để trống");
+      return;
+    }
+    if(!product.stock) {
+      alert("Số lượng không được để trống")
+      return;
+    } 
+    if (product.stock < 0) {
+      alert("Số lượng không nhận giá trị âm");
+      return;
+    }
+
+
     try {
       await axios.patch(
         `https://api-ebook.cyclic.app/api/products/${productId}`,
