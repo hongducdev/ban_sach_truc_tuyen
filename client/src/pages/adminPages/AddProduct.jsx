@@ -10,11 +10,11 @@ const schema = yup.object({
   name: yup.string().required("Tên sản phẩm không được để trống"),
   author: yup.string().required("Tên tác giả không được để trống"),
   introduction: yup.string().required("Giới thiệu không được để trống"),
-  price: yup.number().required("Giá không được để trống"),
+  price: yup.number().required("Giá không được để trống").min(0, "Giá không nhận giá trị âm"),
   description: yup.string().required("Mô tả không được để trống"),
   category: yup.string().required("Danh mục không được để trống"),
   image1: yup.string().required("Ảnh không được để trống"),
-  stock: yup.number().required("Số lượng không được để trống"),
+  stock: yup.number().required("Số lượng không được để trống").min(0, "Số lượng không nhận giá trị âm"),
 });
 
 const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
