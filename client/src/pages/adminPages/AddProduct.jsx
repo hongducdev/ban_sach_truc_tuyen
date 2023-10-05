@@ -35,7 +35,7 @@ const AddProduct = () => {
     mode: "onSubmit",
   });
 
-  const getDropdownLabel = (name, defaultValue = "") => {
+  const getDropdownLabel = (name, defaultValue = categoriesData[0]) => {
     const value = watch(name) || defaultValue;
     return value;
   };
@@ -148,6 +148,9 @@ const AddProduct = () => {
               }
               className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
             >
+              <option value="" disabled hidden>
+                {getDropdownLabel("category", categoriesData[0])}
+              </option>
               {categoriesData.map((category) => (
                 <option
                   key={category}
