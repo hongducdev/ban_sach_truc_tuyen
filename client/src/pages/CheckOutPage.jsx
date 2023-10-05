@@ -10,7 +10,7 @@ import { Loading } from "../components";
 import { Dropdown } from "../components/dropdown";
 import { useNavigate } from "react-router-dom";
 
-const categoriesData = ["Thanh toán khi nhận hàng", "Thanh toán trực tuyến"];
+const categoriesData = ["","Thanh toán khi nhận hàng", "Thanh toán trực tuyến"];
 
 const schema = yup.object({
   name: yup.string().required("Vui lòng nhập họ và tên"),
