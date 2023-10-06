@@ -80,6 +80,13 @@ const EditProduct = () => {
       alert("Hình ảnh không được để trống");
       return;
     }
+    if (
+      !product.images.startsWith("http://") &&
+      !product.images.startsWith("https://")
+    ) {
+      alert("Hình ảnh không hợp lệ");
+      return;
+    }
     if (!product.stock) {
       alert("Số lượng không được để trống");
       return;
