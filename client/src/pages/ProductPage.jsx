@@ -106,6 +106,20 @@ const ProductPage = () => {
   };
 
   const handelSubmitForm = (values) => {
+
+    const email = values.email;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email.match(emailPattern)) {
+      alert("Email không hợp lệ!");
+      return;
+    }
+
+    if (values.star < 1 || values.star > 5) {
+      alert("Đánh giá của bạn phải từ 1 đến 5 sao!");
+      return;
+    }
+
     alert("Đánh giá thành công");
   };
 
