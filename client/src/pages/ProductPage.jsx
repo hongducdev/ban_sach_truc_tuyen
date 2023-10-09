@@ -19,10 +19,7 @@ const schema = yup.object({
     .string()
     .required("Vui lòng nhập số sao đánh giá của bạn")
     .min(1, "Đánh giá của bạn phải từ 1 đến 5 sao")
-    .max(5, "Đánh giá của bạn phải từ 1 đến 5 sao")
-    .typeError("Đánh giá của bạn phải từ 1 đến 5 sao")
-    .integer("Đánh giá của bạn phải từ 1 đến 5 sao")
-    .positive("Đánh giá của bạn phải từ 1 đến 5 sao"),
+    .max(5, "Đánh giá của bạn phải từ 1 đến 5 sao"),
   content: yup.string().required("Vui lòng nhập nội dung"),
 });
 
