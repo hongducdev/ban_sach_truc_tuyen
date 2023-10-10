@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Label } from "../../components";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { set } from "lodash";
 
 const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
 
@@ -19,6 +20,7 @@ const EditProduct = () => {
     images: "",
     stock: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -96,13 +98,16 @@ const EditProduct = () => {
       return;
     }
 
+    setIsLoading(true);
     try {
       await axios.patch(
         `https://api-ebook.cyclic.app/api/products/${productId}`,
         product
       );
+      setIsLoading(false);
       alert("Cập nhật thành công");
     } catch (error) {
+      setIsLoading(false);
       alert("Cập nhật thất bại");
     }
   };
@@ -214,7 +219,7 @@ const EditProduct = () => {
               className="bg-blue-500 text-white px-4 py-2 rounded-lg"
               onClick={onSubmit}
             >
-              Cập nhật
+              {isLoading ? "Đang cập nhật..." : "Cập nhật"}
             </button>
           </div>
         </div>
