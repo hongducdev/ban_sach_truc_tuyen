@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Label } from "../../components";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { set } from "lodash";
 
 const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
 
@@ -83,8 +82,8 @@ const EditProduct = () => {
       return;
     }
     if (
-      !product.images.startsWith("http://") &&
-      !product.images.startsWith("https://")
+      !product.images[0].startsWith("http://") &&
+      !product.images[0].startsWith("https://")
     ) {
       alert("Hình ảnh không hợp lệ");
       return;
