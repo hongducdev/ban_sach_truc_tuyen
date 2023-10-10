@@ -55,7 +55,6 @@ const EditProduct = () => {
     product.author = product.author.trim();
     product.introduction = product.introduction.trim();
     product.description = product.description.trim();
-    product.images = product.images[0].trim();
     product.price = Number(product.price);
     product.stock = Number(product.stock);
 
