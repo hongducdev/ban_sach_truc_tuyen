@@ -49,6 +49,7 @@ const EditProduct = () => {
 
   const onSubmit = async () => {
     // validate dữ liệu đầu vào
+    const urlRegex = /^(http|https):\/\/([^\s]+)/;
     if (!product.name) {
       alert("Tên sản phẩm không được để trống");
       return;
@@ -82,8 +83,7 @@ const EditProduct = () => {
       return;
     }
     if (
-      !product.images[0].startsWith("http://") &&
-      !product.images[0].startsWith("https://")
+      !product.images[0].match(urlRegex)
     ) {
       alert("Hình ảnh không hợp lệ");
       return;
