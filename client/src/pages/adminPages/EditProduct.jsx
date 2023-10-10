@@ -49,6 +49,16 @@ const EditProduct = () => {
 
   const onSubmit = async () => {
     // validate dữ liệu đầu vào
+
+    // cắt khoảng trắng ở đầu và cuối
+    product.name = product.name.trim();
+    product.author = product.author.trim();
+    product.introduction = product.introduction.trim();
+    product.description = product.description.trim();
+    product.images = product.images.trim();
+    product.price = Number(product.price);
+    product.stock = Number(product.stock);
+
     const urlRegex = /^(http|https):\/\/([^\s]+)/;
     if (!product.name) {
       alert("Tên sản phẩm không được để trống");
