@@ -55,6 +55,7 @@ const EditProduct = () => {
     product.author = product.author.trim();
     product.introduction = product.introduction.trim();
     product.description = product.description.trim();
+    product.images[0] = product.images[0].trim();
     product.price = Number(product.price);
     product.stock = Number(product.stock);
 
@@ -91,7 +92,7 @@ const EditProduct = () => {
       alert("Hình ảnh không được để trống");
       return;
     }
-    if (!product.images || !urlRegex.test(product.images)) {
+    if (!product.images || urlRegex.test(product.images[0])) {
       alert("Hình ảnh không hợp lệ");
       return;
     }
