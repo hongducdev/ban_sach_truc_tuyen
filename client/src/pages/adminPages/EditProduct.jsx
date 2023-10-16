@@ -1,25 +1,48 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Label } from "../../components";
+import { useForm } from "react-hook-form";
+import { Input, Label, Textarea } from "../../components";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 import axios from "axios";
+import { Dropdown } from "../../components/dropdown";
 import { useParams } from "react-router-dom";
 
-const categoriesData = ["Sách hướng nghiệp", "Sách triết học"];
+const schema = yup.object({
+  name: yup.string().required("Tên sản phẩm không được để trống"),
+  author: yup.string().required("Tên tác giả không được để trống"),
+  introduction: yup.string().required("Giới thiệu không được để trống"),
+  price: yup.string().required("Giá không được để trống").min(0, "Giá không nhận giá trị âm"),
+  description: yup.string().required("Mô tả không được để trống"),
+  category: yup.string().required("Danh mục không được để trống"),
+  image1: yup.string().required("Ảnh không được để trống"),
+  stock: yup.string().required("Số lượng không được để trống").min(0, "Số lượng không nhận giá trị âm"),
+});
+
+const categoriesData = ["architecture", "education"];
 
 const EditProduct = () => {
   document.title = "Sửa sản phẩm - EBook";
 
   const { productId } = useParams();
-  const [product, setProduct] = useState({
-    name: "",
-    author: "",
-    introduction: "",
-    price: "",
-    description: "",
-    category: "",
-    images: "",
-    stock: "",
+  const [product, setProduct] = useState([]);
+
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
   });
-  const [isLoading, setIsLoading] = useState(false);
+
+  const getDropdownLabel = (name, defaultValue = "") => {
+    const value = watch(name) || defaultValue;
+    return value;
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -27,95 +50,40 @@ const EditProduct = () => {
         const response = await axios.get(
           `https://api-ebook.cyclic.app/api/products/${productId}`
         );
-        setProduct(response.data);
+        const productData = response.data;
+
+        // Set values for the inputs using setValue
+        setValue("name", productData.name);
+        setValue("author", productData.author);
+        setValue("introduction", productData.introduction);
+        setValue("price", productData.price);
+        setValue("description", productData.description);
+        setValue("category", productData.category);
+        setValue("image1", productData.images[0]);
+        setValue("stock", productData.stock);
+
+        setProduct(productData);
       } catch (error) {
         alert("Lỗi load sản phẩm");
       }
     };
     getProduct();
-  }, [productId]);
+  }, [productId, reset]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-  };
-
-  const getDropdownLabel = (name, defaultValue = "") => {
-    const selectedCategory = categoriesData.find(
-      (category) => category === defaultValue
-    );
-    return selectedCategory || "";
-  };
-
-  const onSubmit = async () => {
-    // validate dữ liệu đầu vào
-
-    // cắt khoảng trắng ở đầu và cuối
-    product.name = product.name.trim();
-    product.author = product.author.trim();
-    product.introduction = product.introduction.trim();
-    product.description = product.description.trim();
-    product.price = Number(product.price);
-    product.stock = Number(product.stock);
-
-    const urlRegex = /^(http|https):\/\/([^\s]+)/;
-    if (!product.name) {
-      alert("Tên sản phẩm không được để trống");
-      return;
-    }
-    if (!product.author) {
-      alert("Tên tác giả không được để trống");
-      return;
-    }
-    if (!product.introduction) {
-      alert("Giới thiệu không được để trống");
-      return;
-    }
-    if (!product.price) {
-      alert("Giá không được để trống");
-      return;
-    }
-    if (product.price < 0) {
-      alert("Giá tiền không nhận giá trị âm");
-      return;
-    }
-    if (!product.description) {
-      alert("Mô tả không được để trống");
-      return;
-    }
-    if (!product.category) {
-      alert("Mô tả không được để trống");
-      return;
-    }
-    if (!product.images) {
-      alert("Hình ảnh không được để trống");
-      return;
-    }
-    if (!product.images || urlRegex.test(product.images[0])) {
-      alert("Hình ảnh không hợp lệ");
-      return;
-    }
-    if (!product.stock) {
-      alert("Số lượng không được để trống");
-      return;
-    }
-    if (product.stock < 0) {
-      alert("Số lượng không nhận giá trị âm");
-      return;
-    }
-
-    setIsLoading(true);
+  const onSubmit = async (data) => {
     try {
       await axios.patch(
         `https://api-ebook.cyclic.app/api/products/${productId}`,
-        product
+        data
       );
-      setIsLoading(false);
       alert("Cập nhật thành công");
     } catch (error) {
-      setIsLoading(false);
       alert("Cập nhật thất bại");
     }
+  };
+
+  const handleSelectDropdownOption = (name, value) => {
+    setValue(name, value);
   };
 
   return (
@@ -123,67 +91,65 @@ const EditProduct = () => {
       <div className="bg-darkbg rounded-xl p-5">
         <h2 className="font-semibold text-3xl">Sửa thông tin sản phẩm</h2>
         <p className="">{product.name}</p>
-        <div className="mt-10 flex flex-col gap-3">
+        <form
+          className="mt-10 flex flex-col gap-3"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="flex flex-col gap-3">
             <Label htmlFor="name">Tên sản phẩm</Label>
-            <input
+            <Input
               type="text"
               name="name"
-              placeholder="Nhập tên sản phẩm"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.name}
-              onChange={handleInputChange}
+              control={control}
+              placeholder="Nhập tên sách"
+              className="bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="author">Tên tác giả</Label>
-            <input
+            <Input
               type="text"
               name="author"
+              control={control}
               placeholder="Nhập tên tác giả"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.author}
-              onChange={handleInputChange}
+              className="bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="introduction">Giới thiệu</Label>
-            <textarea
+            <Textarea
               name="introduction"
+              control={control}
               placeholder="Nhập giới thiệu"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.introduction}
-              onChange={handleInputChange}
+              className="bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="price">Giá</Label>
-            <input
+            <Input
               type="number"
               name="price"
+              control={control}
               placeholder="Nhập giá"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.price}
-              onChange={handleInputChange}
+              className="bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="description">Mô tả</Label>
-            <textarea
+            <Textarea
               name="description"
+              control={control}
               placeholder="Nhập mô tả"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.description}
-              onChange={handleInputChange}
+              className="bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="category">Danh mục</Label>
             <select
               name="category"
-              value={product.category || ""}
+              value={getDropdownLabel("category", product.category)}
               onChange={(e) =>
-                setProduct({ ...product, category: e.target.value })
+                handleSelectDropdownOption("category", e.target.value)
               }
               className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
             >
@@ -200,35 +166,33 @@ const EditProduct = () => {
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="images">Ảnh 1</Label>
-            <input
+            <Input
               type="text"
-              name="images"
-              placeholder="Nhập ảnh 1"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.images}
-              onChange={handleInputChange}
+              name="image1"
+              control={control}
+              placeholder="Nhập ảnh"
+              className="bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-3">
             <Label htmlFor="stock">Số lượng</Label>
-            <input
+            <Input
               type="number"
               name="stock"
+              control={control}
               placeholder="Nhập số lượng"
-              className="bg-transparent text-white border rounded-lg outline-none focus:border-primary border-slate-700 p-4"
-              value={product.stock}
-              onChange={handleInputChange}
+              className="bg-transparent text-white"
             />
           </div>
           <div className="my-5 flex justify-end">
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-              onClick={onSubmit}
+              type="submit"
             >
-              {isLoading ? "Đang cập nhật..." : "Cập nhật"}
+              Cập nhật
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </Fragment>
   );
