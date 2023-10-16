@@ -11,7 +11,6 @@ const schema = yup.object({
   email: yup.string().email('Email không hợp lệ').required("Vui lòng nhập email của bạn"),
   phone: yup
     .string()
-    .matches(/^0\d{1,9}$/, "Số điện thoại không hợp lệ")
     .required("Vui lòng nhập số điện thoại của bạn"),
   content: yup.string().required("Vui lòng nhập nội dung"),
 });
@@ -45,6 +44,11 @@ const Contact = () => {
     
     if (!email.match(emailPattern)) {
       alert("Email không hợp lệ!");
+      return;
+    }
+
+    if(phone == "") {
+      alert("Vui lòng nhập số điện thoại của bạn");
       return;
     }
 
