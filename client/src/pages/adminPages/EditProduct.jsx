@@ -91,10 +91,6 @@ const EditProduct = () => {
       alert("Hình ảnh không được để trống");
       return;
     }
-    if (!urlRegex.test(product.images[0])) {
-      alert("Hình ảnh không hợp lệ");
-      return;
-    }
     if (!product.stock) {
       alert("Số lượng không được để trống");
       return;
