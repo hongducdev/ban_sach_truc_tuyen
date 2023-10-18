@@ -91,7 +91,7 @@ const EditProduct = () => {
       alert("Hình ảnh không được để trống");
       return;
     }
-    if (!product.images || urlRegex.test(product.images[0])) {
+    if (!urlRegex.test(product.images[0])) {
       alert("Hình ảnh không hợp lệ");
       return;
     }
